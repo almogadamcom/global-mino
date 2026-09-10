@@ -40,7 +40,7 @@ document.querySelectorAll('dialog').forEach(dialog=>{
 });
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){
  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08});
- document.querySelectorAll('.about-grid,.section-heading,.service,.project').forEach(element=>{element.classList.add('reveal');observer.observe(element)});
+ document.querySelectorAll('.about-grid,.section-heading,.service,.project,.safety-card,.home-banner-copy').forEach(element=>{element.classList.add('reveal');observer.observe(element)});
 }
 const filters=[...document.querySelectorAll('[data-filter]')];
 function filterProjects(value,updateURL=false){
