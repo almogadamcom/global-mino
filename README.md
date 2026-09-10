@@ -31,7 +31,7 @@ The Node server accepts `POST /api/contact`, validates the enquiry and inserts i
 2. Run `supabase/migrations/202609110001_create_enquiries.sql` in the Supabase SQL Editor. This creates the `enquiries` table with RLS enabled and no public access. If using a custom table name, adjust the migration and `SUPABASE_ENQUIRIES_TABLE` together.
 3. Restart with `npm start`.
 
-The local credentials were checked without logging their values. The API was reachable, but reported the table missing; the migration still needs to be applied. Supabase service credentials cannot execute database schema migrations through the Data REST API.
+The migration has been applied to the configured Supabase project. A live browser submission was verified in the database, and its test record was removed. Row level security is enabled; anon and authenticated API roles have no table read access. Supabase service credentials cannot execute schema migrations through the Data REST API; the setup script uses the separate management token.
 
 Static-only hosting needs an equivalent `/api/contact` server endpoint and a configured 404 page. Keep `.env` and the service key outside the public `dist/` directory. No production enquiry is submitted by automated tests; persistence tests use mocked API responses.
 
@@ -44,3 +44,9 @@ Page metadata, canonical URLs, sitemap and robots file use `https://globalmino.c
 ## Supabase environment
 
 The server loads `.env` on startup. It is excluded from Git; `.env.example` contains only empty placeholders. The service role key is never included in static pages. Storage uses Supabase’s [Data REST API](https://supabase.com/docs/guides/api), with [row level security](https://supabase.com/docs/guides/database/postgres/row-level-security) enabled on the enquiry table.
+
+## UI refinements and database setup
+
+Libre Caslon Display and DM Sans are self-hosted as WOFF2 files with their open font licenses in `dist/assets/fonts/`. Typography and spacing follow the approved editorial direction. Project filters support refresh and browser history; the mobile menu manages scrolling and keyboard focus; the enquiry form provides field-level validation and preserves messages after failures.
+
+To let the setup script create the table, put a Supabase management token with database query access in the local `SUPABASE_ACCESS_TOKEN` setting, then run `npm run db:setup`. It checks for the table before applying the supplied migration and verifies row level security. This token is only used by the setup script, never the website.

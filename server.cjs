@@ -24,8 +24,8 @@ let file=path.resolve(root,'.'+decodeURIComponent(url.pathname));
 if(file!==root&&!file.startsWith(root+path.sep)){res.writeHead(403);return res.end()}
 try{if((await fs.stat(file)).isDirectory())file=path.join(file,'index.html')}catch{}
 let data;try{data=await fs.readFile(file)}catch{res.statusCode=404;file=path.join(root,'404.html');data=await fs.readFile(file)}
-res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.jpg':'image/jpeg','.xml':'application/xml','.txt':'text/plain'})[path.extname(file)]||'application/octet-stream');
-res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');res.setHeader('Cache-Control',path.extname(file)==='.jpg'?'public, max-age=86400':'no-cache');res.end(req.method==='HEAD'?undefined:data);
+res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.jpg':'image/jpeg','.xml':'application/xml','.txt':'text/plain','.woff2':'font/woff2'})[path.extname(file)]||'application/octet-stream');
+res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');res.setHeader('Cache-Control',['.jpg','.woff2'].includes(path.extname(file))?'public, max-age=86400':'no-cache');res.end(req.method==='HEAD'?undefined:data);
 }catch{json(res,500,{error:'Request could not be completed'})}
 });
 server.listen(process.env.PORT||4173,'127.0.0.1',()=>console.log(`Local: http://127.0.0.1:${process.env.PORT||4173}`));

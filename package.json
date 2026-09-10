@@ -7,7 +7,8 @@
     "build": "python3 build.py",
     "start": "node server.cjs",
     "check": "node --check server.cjs && node --check dist/script.js",
-    "test": "node --test tests/enquiries.test.cjs && playwright test"
+    "test": "node --test tests/enquiries.test.cjs && playwright test",
+    "db:setup": "node scripts/setup-supabase.cjs"
   },
   "repository": {
     "type": "git",
