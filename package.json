@@ -1,0 +1,28 @@
+{
+  "name": "global-mino-design",
+  "version": "1.0.0",
+  "description": "Homepage design and source assets for the Global Mino mining, exploration and consultancy website.",
+  "main": "index.js",
+  "scripts": {
+    "build": "python3 build.py",
+    "start": "node server.cjs",
+    "check": "node --check server.cjs && node --check dist/script.js",
+    "test": "node --test tests/enquiries.test.cjs && playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almogadamcom/global-mino.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/almogadamcom/global-mino/issues"
+  },
+  "homepage": "https://github.com/almogadamcom/global-mino#readme",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0"
+  },
+  "private": true
+}
