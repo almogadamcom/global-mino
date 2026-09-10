@@ -89,5 +89,5 @@ for path,(title,body) in pages.items():
  dest=out/('404.html' if path=='/404' else path.strip('/')+'/index.html' if path!='/' else 'index.html')
  dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(doc)
 (out/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(f'<url><loc>https://globalmino.com{p}</loc></url>' for p in pages if p!='/404')+'</urlset>')
-(out/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: https://globalmino.com/sitemap.xml\n')
+(out/'robots.txt').write_text('User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: https://globalmino.com/sitemap.xml\n')
 print(f'Built {len(pages)-1} pages and 404 fallback.')
