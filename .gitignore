@@ -1,11 +1,13 @@
 node_modules/
-.env
-.env.*
-!.env.example
 .DS_Store
-node_modules/
 test-results/
 playwright-report/
 __pycache__/
+
+# Vercel CLI artifacts — hold project credentials.
 .vercel
-.env*
+
+# Secrets. The negation must stay last so the template is still tracked.
+.env
+.env.*
+!.env.example
