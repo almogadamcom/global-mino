@@ -1,0 +1,100 @@
+/* Shared country layout. Keep typography and spacing scoped to these pages. */
+.country-profile {
+  --profile-muted: #565f66;
+  --profile-line: #e0e4e6;
+  --profile-width: 1120px;
+  background: #fff;
+  color: #20292f;
+  font-family: 'DM Sans', Arial, sans-serif;
+}
+.country-profile h1,
+.country-profile h2,
+.country-profile h3 {
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.profile-hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 145px max(32px, calc((100% - var(--profile-width)) / 2)) 48px;
+  background: #141c22;
+  color: #fff;
+}
+.profile-heading .breadcrumb { font-size: 13px; color: #c4cbd0; margin-bottom: 26px; gap: 10px; }
+.profile-heading .eyebrow { font-size: 11px; letter-spacing: 1.3px; color: #dfbd77; }
+.profile-heading h1 { font-size: clamp(36px, 3.6vw, 52px); line-height: 1.12; margin: 14px 0 18px; }
+.profile-intro { max-width: 540px; font-size: 16px; line-height: 1.75; color: #d6dce0; margin-bottom: 26px; }
+.country-profile .button { border-radius: 5px; font-size: 12px; letter-spacing: .2px; font-weight: 600; padding: 14px 20px; min-height: 48px; }
+.profile-photo { margin: 0; height: 280px; position: relative; }
+.profile-photo img { border-radius: 8px; }
+.profile-photo figcaption { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 14px 12px; border-radius: 0 0 8px 8px; background: linear-gradient(transparent, #000c); color: #fff; font-size: 10px; }
+.profile-country-switch { display: flex; gap: 32px; padding: 0 max(32px, calc((100% - var(--profile-width)) / 2)); border-bottom: 1px solid var(--profile-line); background: #fff; }
+.profile-country-switch a { display: flex; align-items: center; min-height: 60px; padding: 14px 0; border-bottom: 3px solid transparent; font-size: 14px; color: #59626a; }
+.profile-country-switch a[aria-current] { border-color: #977024; color: #20292f; font-weight: 600; }
+.profile-content { max-width: calc(var(--profile-width) + 64px); margin: auto; padding: 0 32px 40px; }
+.profile-content h2 { font-size: 28px; line-height: 1.3; }
+.profile-content .eyebrow, .profile-label { font-size: 11px; letter-spacing: 1px; color: #76591e; font-weight: 600; }
+.profile-overview { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; align-items: center; padding: 32px 0; border-bottom: 1px solid var(--profile-line); }
+.profile-overview h2 { font-size: 22px; margin-top: 8px; }
+.profile-overview dl { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 0; }
+.profile-overview dt { font-size: 12px; color: var(--profile-muted); margin-bottom: 6px; }
+.profile-overview dd { font-size: 14px; line-height: 1.6; margin: 0; font-weight: 500; }
+.profile-mining { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; padding: 40px 0; }
+.profile-mining article + article { border-left: 1px solid var(--profile-line); padding-left: 36px; }
+.profile-mining h2 { font-size: 24px; margin: 12px 0; }
+.profile-mining p, .profile-cards p, .profile-note p, .profile-support p { font-size: 15px; line-height: 1.8; color: var(--profile-muted); }
+.profile-opportunities { padding: 32px 0 28px; border-top: 1px solid var(--profile-line); }
+.profile-opportunities h2 { margin: 10px 0; }
+.profile-section-intro { font-size: 15px; color: var(--profile-muted); }
+.profile-cards { margin-top: 24px; border-top: 1px solid var(--profile-line); }
+.profile-cards article { display: grid; grid-template-columns: 36px minmax(180px, .8fr) 1.5fr; gap: 24px; align-items: start; padding: 24px 0; border-bottom: 1px solid var(--profile-line); }
+.profile-number { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #f3efe5; font-size: 12px; color: #72551b; }
+.profile-cards h3 { font-size: 18px; line-height: 1.5; margin: 2px 0 0; }
+.profile-note { padding: 20px 24px; border-radius: 6px; background: #f5f6f7; }
+.profile-note h3 { font-size: 15px; letter-spacing: 0; line-height: 1.5; margin-bottom: 6px; }
+.profile-note p { font-size: 14px; }
+.profile-support { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 36px 0; }
+.profile-support h2 { font-size: 24px; margin: 10px 0; }
+.profile-support p { max-width: 640px; }
+.profile-support .button { flex-shrink: 0; }
+.profile-sources { border-top: 1px solid var(--profile-line); padding-top: 12px; color: var(--profile-muted); font-size: 13px; }
+.profile-sources summary { min-height: 44px; display: flex; align-items: center; width: fit-content; color: #34434e; }
+.profile-sources p { max-width: 850px; }
+.profile-sources a { text-decoration: underline; text-underline-offset: 3px; }
+.profile-sources li { margin: 10px 0; }
+.country-profile a:focus-visible, .profile-sources summary:focus-visible { outline: 2px solid #ac7923; outline-offset: 5px; }
+@media (max-width: 1000px) {
+  .profile-hero { gap: 32px; }
+  .profile-photo { height: 260px; }
+  .profile-mining { gap: 28px; }
+  .profile-mining article + article { padding-left: 28px; }
+  .profile-overview { grid-template-columns: 1fr; gap: 20px; }
+  .profile-support { align-items: flex-start; flex-direction: column; gap: 20px; }
+}
+@media (max-width: 700px) {
+  .profile-hero { grid-template-columns: 1fr; padding: 116px 24px 28px; gap: 26px; }
+  .profile-heading h1 { font-size: 36px; }
+  .profile-heading .breadcrumb { margin-bottom: 20px; }
+  .profile-heading .eyebrow { font-size: 10px; }
+  .profile-photo { height: 180px; }
+  .profile-country-switch { gap: 24px; padding: 0 24px; overflow-x: auto; }
+  .profile-country-switch a { flex-shrink: 0; font-size: 13px; min-height: 54px; }
+  .profile-content { padding: 0 24px 28px; }
+  .profile-overview { padding: 26px 0; }
+  .profile-overview dl { gap: 20px; }
+  .profile-mining { grid-template-columns: 1fr; padding: 28px 0; gap: 28px; }
+  .profile-mining article + article { padding: 0; border: 0; }
+  .profile-content h2 { font-size: 24px; }
+  .profile-overview h2 { font-size: 21px; }
+  .profile-mining h2 { font-size: 22px; }
+  .profile-opportunities { padding-top: 28px; }
+  .profile-cards article { grid-template-columns: 34px 1fr; gap: 8px 16px; padding: 22px 0; }
+  .profile-cards h3 { font-size: 17px; }
+  .profile-cards p { grid-column: 2; }
+  .profile-note { padding: 18px; }
+  .profile-support { padding: 28px 0; }
+  .profile-support .button { width: 100%; justify-content: space-between; }
+}

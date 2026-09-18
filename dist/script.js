@@ -33,7 +33,7 @@ document.addEventListener('keydown',e=>{
  }
 });
 nav.addEventListener('focusout',()=>setTimeout(()=>{if(!nav.contains(document.activeElement))nav.querySelectorAll('details').forEach(d=>d.open=false)},0));
-document.querySelector('#credits-open').addEventListener('click',()=>document.querySelector('#credits-dialog').showModal());
+document.querySelector('#credits-open')?.addEventListener('click',()=>document.querySelector('#credits-dialog').showModal());
 document.querySelectorAll('dialog').forEach(dialog=>{
  dialog.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
  dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close()}});
@@ -81,10 +81,57 @@ if(form){
   const payload=Object.fromEntries(new FormData(form));fields.forEach(field=>field.disabled=true);
   try{
    const response=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(15000)});
-   if(!response.ok)throw Error(response.status===400?'Please check your enquiry details and try again.':'Your enquiry has not been sent. Please try again or email hashim@globalmino.com.');
-   const result=await response.json();if(result.ok!==true)throw Error('Your enquiry could not be confirmed. Please contact hashim@globalmino.com.');
+   if(!response.ok)throw Error(response.status===400?'Please check your enquiry details and try again.':'Your enquiry has not been sent. Please try again or email info@globalmino.com.');
+   const result=await response.json();if(result.ok!==true)throw Error('Your enquiry could not be confirmed. Please contact info@globalmino.com.');
    status.className='success';status.textContent='Your enquiry has been received. Thank you for contacting Global Mino.';form.reset();fields.forEach(f=>f.removeAttribute('aria-invalid'));
-  }catch(error){status.className='error';status.textContent=error.name==='TimeoutError'?'We could not confirm receipt. Please contact hashim@globalmino.com before resending. Your message remains in the form.':error.message.includes('enquiry')?error.message:'Your enquiry could not be confirmed. Please contact hashim@globalmino.com. Your message remains in the form.'}
+  }catch(error){status.className='error';status.textContent=error.name==='TimeoutError'?'We could not confirm receipt. Please contact info@globalmino.com before resending. Your message remains in the form.':error.message.includes('enquiry')?error.message:'Your enquiry could not be confirmed. Please contact info@globalmino.com. Your message remains in the form.'}
   finally{fields.forEach(field=>field.disabled=false);button.disabled=false;button.innerHTML='SEND ENQUIRY <span>↗</span>';form.removeAttribute('aria-busy');status.focus()}
  });
+}
+// Site visits gallery: each visit's frames open in a shared lightbox, which
+// navigates within that visit's collection only. Frames without a supplied
+// photograph open too, showing the reserved slot rather than an empty screen.
+const lightbox=document.querySelector('#lightbox');
+if(lightbox){
+ const stage=lightbox.querySelector('[data-lightbox-stage]');
+ const caption=lightbox.querySelector('[data-lightbox-caption]');
+ const collection=lightbox.querySelector('[data-lightbox-collection]');
+ const counter=lightbox.querySelector('[data-lightbox-count]');
+ const pad=number=>String(number).padStart(2,'0');
+ let group=[],current=0;
+ function render(){
+  const shot=group[current];
+  stage.replaceChildren();
+  if(shot.dataset.full){const photo=new Image();photo.src=shot.dataset.full;photo.alt=shot.dataset.caption;stage.append(photo)}
+  else{
+   const pending=document.createElement('p');pending.className='lightbox-pending';
+   const number=document.createElement('b');number.textContent=pad(current+1);
+   const note=document.createElement('i');note.textContent='This photograph has not been supplied yet. The frame is reserved for it.';
+   pending.append(number,note);stage.append(pending);
+  }
+  caption.textContent=shot.dataset.caption;
+  collection.textContent=shot.dataset.collection;
+  counter.textContent=`${pad(current+1)} / ${pad(group.length)}`;
+  stage.classList.remove('is-entering');void stage.offsetWidth;stage.classList.add('is-entering');
+ }
+ function step(move){current=(current+move+group.length)%group.length;render()}
+ document.querySelectorAll('.shot').forEach(shot=>shot.addEventListener('click',()=>{
+  group=[...shot.closest('.visit').querySelectorAll('.shot')];current=group.indexOf(shot);
+  render();lightbox.showModal();document.body.classList.add('lightbox-open');
+ }));
+ lightbox.querySelector('[data-lightbox-prev]').addEventListener('click',()=>step(-1));
+ lightbox.querySelector('[data-lightbox-next]').addEventListener('click',()=>step(1));
+ lightbox.addEventListener('keydown',event=>{
+  if(event.key==='ArrowRight')step(1);
+  else if(event.key==='ArrowLeft')step(-1);
+  else if(event.key==='Home'||event.key==='End'){event.preventDefault();current=event.key==='Home'?0:group.length-1;render()}
+ });
+ // A click beside the photograph closes; a horizontal drag moves through the collection.
+ lightbox.addEventListener('click',event=>{if(['lightbox','lightbox-inner','lightbox-figure'].some(name=>event.target.classList.contains(name)))lightbox.close()});
+ let startX=null;
+ stage.addEventListener('pointerdown',event=>{startX=event.clientX});
+ stage.addEventListener('pointerup',event=>{if(startX!==null&&Math.abs(event.clientX-startX)>45)step(event.clientX<startX?1:-1);startX=null});
+ stage.addEventListener('pointercancel',()=>{startX=null});
+ // Return focus to the frame that was last on screen, not the one first opened.
+ lightbox.addEventListener('close',()=>{document.body.classList.remove('lightbox-open');stage.replaceChildren();group[current]?.focus()});
 }

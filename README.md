@@ -21,7 +21,7 @@ npm run check
 npm test
 ```
 
-Browser tests use installed Google Chrome (`channel: 'chrome'`) and cover all 15 concrete pages at 1440, 1280, 1024, 768 and 390 pixels, local links, image loading, accessibility, menus, project filters, contact states and 404 behavior. These implement 13 primary templates, with three placeholder project detail instances. There is no TypeScript or existing lint toolchain.
+Browser tests use installed Google Chrome (`channel: 'chrome'`) and cover all 21 concrete pages at 1440, 1280, 1024, 768 and 390 pixels, local links, image loading, accessibility, menus, project filters, contact states and 404 behavior. These implement 15 primary templates, with three placeholder project detail instances. There is no TypeScript or existing lint toolchain.
 
 ## Enquiry storage with Supabase
 
