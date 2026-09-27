@@ -3,10 +3,11 @@ import re, html
 from country_content import INFO, GOLD, PROFILES
 from team_profiles import TEAM_PROFILES
 from site_visits import VISITS
+import ceo_message as ceo
 root=Path(__file__).parent
 out=root/'dist'
 source=(root/'src/home.html').read_text()
-countries=[('Sudan','sudan','sudan','Gold Mining & Mineral Opportunities','Gold Mining|Mineral Exploration|Geological Services|Mining Consultancy|Technical Support|Responsible Resource Development'),('Cameroon','cameroon','cameroon','Geological Intelligence & Mineral Opportunity Development','Geological Mapping|Mineral Resource Intelligence|Mining Concession Identification|License & Legal Status Verification|Field Exploration|Sampling|Geochemical Investigation|Geophysical Investigation|Exploration Target Development|Prospective Area Identification|ASM Opportunity Assessment|GIS & Digital Deliverables|Technical Opportunity Reports'),('Central African Republic','central-african-republic','fieldwork','Mineral Exploration & Mining Opportunities','Mineral Exploration|Mining Consultancy|Geological Assessment|Opportunity Identification|Technical Support|Responsible Resource Development')]
+countries=[('Sudan','sudan','sudan','Gold Mining & Mineral Opportunities','Gold Mining|Mineral Exploration|Geological Services|Mining Consultancy|Technical Support|Responsible Resource Development'),('Cameroon','cameroon','cameroon','Geological Intelligence & Mineral Opportunity Development','Geological Mapping|Mineral Resource Intelligence|Mining Concession Identification|License & Legal Status Verification|Field Exploration|Sampling|Geochemical Investigation|Geophysical Investigation|Exploration Target Development|Prospective Area Identification|ASM Opportunity Assessment|GIS & Digital Deliverables|Technical Opportunity Reports'),('Central African Republic','central-african-republic','fieldwork','Mineral Exploration & Mining Opportunities','Mineral Exploration|Mining Consultancy|Geological Assessment|Opportunity Identification|Technical Support|Responsible Resource Development'),('Ethiopia','ethiopia','hero','Gold, Industrial & Strategic Minerals','Mineral Exploration|Gold Mining|Geological Assessment|Mining Consultancy|Technical Support|Responsible Resource Development')]
 services=[('Gold Mining','gold-mining','hero','Developing opportunity.<br>Creating responsible value.','Mining Opportunity Assessment|Technical Evaluation|Mining Development Support|Operational Advisory|Safety Considerations|Environmental Considerations|Responsible Resource Development','Opportunity|Assessment|Planning|Development|Operations Support'),('Mineral Exploration','mineral-exploration','geologist','Understanding what<br>lies beneath.','Geological Mapping|Reconnaissance|Field Mapping|Rock Sampling|Soil Sampling|Stream Sediment Sampling|Trenching|Geochemical Investigation|Geophysical Investigation|Historical Data Review|Target Generation|Prospective Area Ranking','Field|Sample|Analysis|Interpretation|Target|Opportunity'),('Mining Consultancy','mining-consultancy','fieldwork','Technical insight.<br>Strategic perspective.','Technical Advisory|Geological Assessment|Opportunity Evaluation|Mining Project Evaluation|Risk Assessment|Operational Support|Investment Intelligence|Market Entry Support|Regulatory Coordination Support|Environmental Considerations|Occupational Health & Safety','Context|Assessment|Technical Review|Recommendation'),('Occupational Health & Safety','occupational-health-safety','fieldwork','Protecting people.<br>Strengthening operations.','Occupational Health Services|Health Risk Assessments|Health Surveillance|Industrial Hygiene|Emergency Preparedness|Dynamic Risk Management','Assess|Measure|Control|Monitor|Respond|Improve')]
 alts={'hero':'Illustrative terraced open-pit mine','sudan':'Arid landscape south of Port Sudan','cameroon':'Rainforest in Bodiman, Cameroon','geologist':'Illustrative granite examination in Alaska','fieldwork':'Illustrative geophysical field survey in Hawaii'}
 def link(text,url,cls='text-link'): return f'<a class="{cls}" href="{url}">{text} <span>↗</span></a>'
@@ -22,7 +23,7 @@ paths={'home':'/','about':'/about','team':'/team','operations':'/operations','ga
 def routes(s):
  for a,b in paths.items(): s=s.replace(f'href="#{a}"',f'href="{b}"')
  return s
-footer=routes(footer).replace('<a href="/operations">Operations</a>','<a href="/operations">Operations</a><a href="/team">Team</a><a href="/gallery">Gallery</a>').replace('href="/">BACK TO TOP','href="#top">BACK TO TOP')
+footer=routes(footer).replace('<a href="/about">About</a>','<a href="/about">About</a><a href="/ceo-message">CEO Message</a>').replace('<a href="/countries/central-african-republic">Central African Republic</a>','<a href="/countries/central-african-republic">Central African Republic</a><a href="/countries/ethiopia">Ethiopia</a>').replace('<a href="/operations">Operations</a>','<a href="/operations">Operations</a><a href="/team">Team</a><a href="/gallery">Gallery</a>').replace('href="/">BACK TO TOP','href="#top">BACK TO TOP')
 def hero(label,title,copy,img='hero'):
  return f'''<section class="site-hero">
  <div class="site-hero-heading"><div class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>{label.title()}</span></div><p class="eyebrow">{label.upper()}</p><h1>{title}</h1><p class="site-hero-copy">{copy}</p></div>
@@ -61,41 +62,56 @@ pages={}
 home=re.search(r'<main>(.*?)</main>',source,re.S).group(1)
 home=routes(home)
 home_hero='''<section class="site-hero home-site-hero" id="home">
- <div class="site-hero-heading"><p class="eyebrow">GLOBAL MINO / MINING · EXPLORATION · CONSULTANCY</p><h1>Unlocking Africa’s<br><em>Mineral Potential.</em></h1><p class="site-hero-copy">Global Mino delivers mining, mineral exploration and technical consultancy across Sudan, Cameroon and the Central African Republic.</p><div class="actions"><a class="button gold" href="/operations">EXPLORE OUR OPERATIONS <span>↗</span></a><a class="text-link light" href="/services">OUR SERVICES <span>↗</span></a></div></div>
- <figure class="site-hero-photo" style="background-image:linear-gradient(90deg,#10141922,#10141955),url(/assets/hero.jpg)"></figure>
+ <div class="home-hero-glow" aria-hidden="true"></div>
+ <div class="site-hero-heading">
+  <p class="eyebrow"><span></span>AFRICA-FOCUSED MINING &amp; EXPLORATION</p>
+  <h1>Unlocking Africa’s<br><em>mineral potential.</em></h1>
+  <p class="site-hero-copy">Global Mino brings geological knowledge, field intelligence and technical consultancy together to move mineral opportunities forward responsibly.</p>
+  <div class="actions"><a class="button gold" href="/operations">EXPLORE OUR OPERATIONS <span>↗</span></a><a class="text-link light" href="/services">DISCOVER OUR EXPERTISE <span>↗</span></a></div>
+ </div>
+ <figure class="site-hero-photo" role="img" aria-label="Illustrative open-pit gold mining landscape" style="background-image:url(/assets/hero-gold-mining-v2.jpg)"><figcaption><span>GOLD MINING</span><b>Illustrative mining perspective</b></figcaption></figure>
+ <div class="home-hero-rail" aria-label="Our approach"><p>AFRICAN PERSPECTIVE</p><p>FIELD-LED KNOWLEDGE</p><p>RESPONSIBLE DEVELOPMENT</p><a href="#about">SCROLL TO DISCOVER <span>↓</span></a></div>
  </section>'''
 home=re.sub(r'<section class="hero" id="home">.*?</section>',home_hero,home,count=1,flags=re.S)
-for c,old in zip(countries,['sudan','cameroon','car']): home=home.replace(f'href="/contact" id="{old}"',f'href="/countries/{c[1]}" id="{old}"')
+home=re.sub(r'<div class="country-grid">.*?</div></section>',lambda m:panels()+'</section>',home,count=1,flags=re.S)
 home=home.replace('href="/contact">DISCOVER GLOBAL MINO','href="/about">DISCOVER GLOBAL MINO')
+home=home.replace('Three markets.<br>One African vision.','Four markets.<br>One African vision.')
 for s,text in zip(services,['DISCOVER GOLD MINING','EXPLORE OUR CAPABILITIES','VIEW CONSULTANCY']): home=home.replace(f'href="/contact">{text}',f'href="/services/{s[1]}">{text}')
 i=iter(range(1,4))
 home=re.sub(r'<button class="text-link project-open".*?</button>',lambda m:link('VIEW PROJECT',f'/projects/project-0{next(i)}'),home)
 home=re.sub(r'<footer>.*?</footer>',lambda m:footer,home).replace('href="mailto:hashim@globalmino.com?subject=Discuss%20an%20opportunity"','href="/contact"')
 home=home.replace('src="assets/','src="/assets/').replace('href="/about">SCROLL','href="#about">SCROLL')
 banner='''<section class="home-banner ohs-home-banner" aria-labelledby="ohs-banner"><div class="home-banner-media"><img src="/assets/ohs-mining-safety.jpg" alt="Mine safety team conducting a pre-shift inspection at an open-pit mine" loading="lazy" width="1536" height="1024"></div><div class="home-banner-copy"><p class="eyebrow">OCCUPATIONAL HEALTH &amp; SAFETY</p><h2 id="ohs-banner">Every person.<br><em>Every task. Every shift.</em></h2><p>A practical framework for managing critical risks, protecting worker health and preparing mining and exploration teams to respond when conditions change.</p><div class="home-banner-actions">'''+link('EXPLORE OUR OHS APPROACH','/services/occupational-health-safety')+'''<span>Mining · Exploration · Field Operations</span></div></div></section>'''
-home=home.replace('<section class="projects section" id="projects">',banner+'<section class="projects section" id="projects">')
+home=home.replace('<section class="about section" id="about">',banner+'<section class="about section" id="about">')
 # Home page only: drop the section/service counters, the hero index and the
 # "01 / " prefix on the country tiles. The shared helpers keep their numbering
 # so the inner pages are unaffected.
 home=re.sub(r'<span class="(?:number|service-no|hero-index)">.*?</span>','',home)
 home=re.sub(r'(<span class="country-no">)\s*\d+\s*/\s*','\\1',home)
+# The homepage uses labels rather than decorative sequence numbers. Inner
+# project and service pages retain their useful ordered steps.
+home=re.sub(r'<span>\d{2}</span>(MINING|EXPLORATION|CONSULTANCY)',r'\1',home)
+home=re.sub(r'PROJECT PLACEHOLDER\s*/\s*\d+','PROJECT PLACEHOLDER',home)
 # Home page only: remove the photography-credits link from the footer.
 home=home.replace('<button id="credits-open">Photography credits</button>','')
 pages['/']=('Global Mino | Mining, Exploration & Consultancy',home)
 about=hero('About Global Mino','Building value<br>beneath the surface.','An Africa-focused mining, mineral exploration and technical consultancy company.','geologist')
-about+=section('WHO WE ARE','Mining expertise.<br>African perspective.','<div class="about-grid editorial"><div><p>Global Mino combines mining expertise, geological knowledge and technical consultancy to identify, evaluate and support mineral opportunities across Africa.</p><p>Our focus connects geological understanding with responsible development and strategic collaboration across Sudan, Cameroon and the Central African Republic.</p></div><figure class="about-image">'+image('geologist')+'</figure></div>')
+about+=section('WHO WE ARE','Mining expertise.<br>African perspective.','<div class="about-grid editorial"><div><p>Global Mino combines mining expertise, geological knowledge and technical consultancy to identify, evaluate and support mineral opportunities across Africa.</p><p>Our focus connects geological understanding with responsible development and strategic collaboration across Sudan, Ethiopia, Cameroon and the Central African Republic.</p></div><figure class="about-image">'+image('geologist')+'</figure></div>')
 about+=section('OUR PURPOSE','Turning mineral potential<br>into sustainable value.','<div class="type-grid"><article><p class="eyebrow">VISION</p><p>To position Global Mino as a trusted African partner in responsible mining, mineral exploration and technical consultancy.</p></article><article><p class="eyebrow">MISSION</p><p>To support mineral opportunities through geological knowledge, technical expertise, responsible practices and strategic collaboration.</p></article></div>','services')
-about+=section('OUR VALUES','The principles beneath our work.',blocks('Technical Excellence|Integrity|Safety|Environmental Responsibility|Data Integrity|Partnership|Community Value'))+section('AFRICAN PRESENCE','Three markets. One African vision.',panels(),'operations')+cta('Discover our operations','/operations')
+about+=section('OUR VALUES','The principles beneath our work.',blocks('Technical Excellence|Integrity|Safety|Environmental Responsibility|Data Integrity|Partnership|Community Value'))+section('AFRICAN PRESENCE','Four markets. One African vision.',panels(),'operations')+cta('Discover our operations','/operations')
 pages['/about']=('About Global Mino | African Mining & Exploration',about)
 employees=[
  ('Dr. Hashim Sulieman','Founder & Chief Executive Officer','Founder and CEO of Almogadam Multi Activities Company Ltd, overseeing its Global Mining and Global Health businesses. An occupational medicine physician and business leader with more than 15 years of experience across Europe, Africa and the Middle East.','team-hashim.jpg','hashim-sulieman','MBBS, University of Khartoum · LFOM & MFOM, RCPI Faculty of Occupational Medicine · MRCGP (UK) · MBA International Business & MSc Healthcare Management, Swiss Business School · Higher Diploma in Diabetes, Plymouth University'),
  ('Eng. Muhammad Abdul Rahman Abdul Wahab','Senior Geologist & Data Analyst','A senior geologist and data analyst with more than 20 years of experience, focused on gold mining and mineral exploration alongside oil and gas operations.','team-muhammad.jpg','muhammad-abdul-rahman','B.Sc. Theoretical Geology & Chemistry, Faculty of Science, University of Khartoum'),
- ('Eng. Abdelrazig Ahmed Abdelrazig Ahmed','Project Manager & Technical Consultant','A geologist and mining professional with more than 10 years of experience across exploration, production, processing systems, technical consulting and mining-project management.','team-abdelrazig.jpg','abdelrazig-ahmed','B.Sc. Geology, specialising in Petroleum Geology, College of Petroleum and Minerals, Al-Neelain University'),
- ('Eng. Huzaifa Ahmed Salih Mohamed','Processing Engineer & Project Manager','A chemical engineer with more than six years of experience across cement and mining operations, specialising in mineral processing, production quality control and project delivery. He spent three years with Ariab Mining Company, the largest mining company in Sudan.','team-huzaifa.jpg','huzaifa-ahmed-salih','B.Sc. (Honours) in Chemical Engineering'),
+ ('Eng. Abdelrazig Ahmed Abdelrazig Ahmed','Technical Consultant & Geologist','A geologist and mining professional with more than 10 years of experience across exploration, production, processing systems, technical consulting and mining-project management.','team-abdelrazig.jpg','abdelrazig-ahmed','B.Sc. Geology, specialising in Petroleum Geology, College of Petroleum and Minerals, Al-Neelain University'),
+ ('Eng. Huzaifa Ahmed Salih Mohamed','Processing Engineer','A chemical engineer with more than six years of experience across cement and mining operations, specialising in mineral processing, production quality control and project delivery. He spent three years with Ariab Mining Company, the largest mining company in Sudan.','team-huzaifa.jpg','huzaifa-ahmed-salih','B.Sc. (Honours) in Chemical Engineering'),
  ('Dr. Rawi Elamin','Public Health Epidemiologist','A public health epidemiologist and global health security specialist with 16 years of experience supporting the World Health Organization (WHO) and national Ministries of Health across multiple regions.','team-rawi.jpg','rawi-elamin','MPH Epidemiology & Biostatistics, American University of Beirut · B.Sc. Public Health, University of Bahri'),
  ('Dr. Mona Ahmed Yagoub Mohammed','Public & Environmental Health Specialist','A multidisciplinary public and environmental health professional with more than 10 years of experience, focused on occupational health and safety and EHS/HSE management, alongside epidemiology and disease prevention.','team-mona.jpg','mona-ahmed-yagoub-mohammed','M.Sc. Public & Environmental Health, University of Gezira · B.Sc. Health & Environmental Sciences, University of Gezira'),
- ('Bushra Babiker Ahmed Babiker','Accounting & Project Management Professional','An accounting and project management professional with experience in administration, organisational leadership, publishing and community organisations in Sudan and Lebanon.','team-bushra.jpg','bushra-babiker-ahmed-babiker','MBA Project Management, Sudan International University · B.Sc. Accounting, Omdurman Islamic University'),
+ ('Bushra Babiker Ahmed Babiker','Project Manager','An accounting and project management professional with experience in administration, organisational leadership, publishing and community organisations in Sudan and Lebanon.','team-bushra.jpg','bushra-babiker-ahmed-babiker','MBA Project Management, Sudan International University · B.Sc. Accounting, Omdurman Islamic University'),
  ('Dr. Ahmed Omar','Medical Doctor & Public Health Professional','A medical doctor and public health professional advancing stronger, data-led health systems across Africa and the Caribbean.','team-ahmed-omar.jpg',None,'MPH, KIT Royal Tropical Institute and Vrije Universiteit Amsterdam'),
+ ('Abdalla Adam Younis Mohammed','Biotechnology & Humanitarian Partnerships Professional','A biotechnology and microbiology graduate with more than 15 years of experience across national and international organisations, emergency response, field operations and NGO partnership coordination.','team-abdalla-adam.jpg','abdalla-adam-younis-mohammed','M.Sc. Disaster Management, International University of Africa · B.Sc. Biotechnology & Microbiology, Omdurman Islamic University'),
+ ('Eng. Ogba Adam Edris Ali','Civil Engineer','A civil-engineering professional with experience in project management, infrastructure supervision, quality control, road maintenance and materials testing across Sudan and Saudi Arabia.','team-ogba-adam.jpg','ogba-adam-edris-ali','B.Sc. Civil Engineering · Mini MBA, British International Academy'),
+ ('Eng. Ezzeldin Ali Suleiman Omar','Civil Engineer & Infrastructure Supervisor','A civil engineer whose experience spans roads, bridges, public infrastructure, materials supervision and municipal projects in Sudan and Saudi Arabia.','team-ezzeldin-ali.jpg','ezzeldin-ali-suleiman-omar','B.Sc. Civil Engineering — Roads & Transport, Sudan University of Science and Technology'),
 ]
 def team_education(text):
  return f'<p class="team-education"><span>Education</span>{html.escape(text)}</p>' if text else ''
@@ -152,7 +168,10 @@ def visit_photo(visit,index,total,photo):
  else:
   media=f'<span class="shot-pending" aria-hidden="true"><b>{number}</b><i>Awaiting photograph</i></span>'
   source=''
- return (f'<button class="shot{" feature" if index==1 else ""}" type="button"{source} data-caption="{html.escape(caption,quote=True)}"'
+ # The lead frame covers a 2x2 area. When the remaining frames would leave a
+ # single empty cell at the end of the grid, the last one widens to close it.
+ shape=' feature' if index==1 else (' wide' if index==total and (total+3)%4==3 else '')
+ return (f'<button class="shot{shape}" type="button"{source} data-caption="{html.escape(caption,quote=True)}"'
   f' data-collection="{html.escape(collection,quote=True)}" aria-label="{html.escape(label,quote=True)}">{media}'
   '<span class="shot-hint" aria-hidden="true">VIEW <b>↗</b></span></button>')
 def visit_section(index,visit):
@@ -165,7 +184,7 @@ def visit_section(index,visit):
  <p class="visit-copy">{visit['description']}</p>
  <dl class="visit-meta">{''.join(f'<div><dt>{a}</dt><dd>{html.escape(b)}</dd></div>' for a,b in meta)}</dl>
  </div>
- <div class="visit-grid">{''.join(visit_photo(visit,n,total,photo) for n,photo in enumerate(visit['photos'],1))}</div>
+ <div class="visit-grid{' cols-3' if total==3 else ''}">{''.join(visit_photo(visit,n,total,photo) for n,photo in enumerate(visit['photos'],1))}</div>
  </article>'''
 lightbox='''<dialog id="lightbox" class="lightbox" aria-label="Site visit photograph viewer">
  <div class="lightbox-inner">
@@ -175,10 +194,35 @@ lightbox='''<dialog id="lightbox" class="lightbox" aria-label="Site visit photog
  </div>
  </dialog>'''
 gallery=hero('Gallery','Inside the field.<br><em>Site by site.</em>','Photographs from our team’s visits to mining locations across Sudan, Cameroon and the Central African Republic.','sudan')
-gallery+=section('FIELD RECORD','A record of our visits<br>to mining locations.','<p class="intro-copy">Site visits are where the geological, processing and occupational health work actually happens. This page gathers the photography from those visits, grouped by location, so each set can be opened and viewed as a complete collection.</p><p class="form-note gallery-note">Photography from these visits has not been supplied yet. Every frame below is a reserved slot, and no image on this page is presented as a photograph of a Global Mino site. When the team provides the files together with their locations, dates and captions, they replace the placeholders and each collection opens with the real photographs.</p>')
+gallery+=section('FIELD RECORD','A record of our visits<br>to mining locations.','<p class="intro-copy">Site visits are where the geological, processing and occupational health work actually happens. This page gathers the photography from those visits, grouped by location, so each set can be opened and viewed as a complete collection.</p>')
 gallery+='<div class="visits">'+''.join(visit_section(i,visit) for i,visit in enumerate(VISITS,1))+'</div>'+lightbox
 gallery+=cta('Discuss a site visit','/contact')
 pages['/gallery']=('Gallery | Global Mino',gallery)
+# Message from the Founder & Chief Executive Officer. The letter is reproduced
+# from the supplied text in ceo_message.py; the module records where that text
+# breaks off. Nothing here writes company statements of its own.
+letter=''
+for part in ceo.SECTIONS:
+ if part['heading']: letter+=f'<h2>{html.escape(part["heading"])}</h2>'
+ if part.get('quote'): letter+=f'<blockquote class="ceo-quote"><p>{html.escape(part["quote"])}</p></blockquote>'
+ letter+=''.join(f'<p>{html.escape(paragraph)}</p>' for paragraph in part['paragraphs'])
+message=f'''<section class="ceo-hero">
+ <div class="ceo-hero-copy">
+ <div class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>CEO message</span></div>
+ <p class="eyebrow">CEO MESSAGE</p>
+ <h1>Message from the Founder<br><em>&amp; Chief Executive Officer</em></h1>
+ <p class="ceo-company">{html.escape(ceo.COMPANY)}</p>
+ <p class="ceo-lead">{html.escape(ceo.LEAD)}</p>
+ </div>
+ <figure class="ceo-portrait">
+ <img src="/assets/{ceo.PHOTO}" alt="Portrait of {html.escape(ceo.NAME,quote=True)}, {html.escape(ceo.ROLE,quote=True)}" width="{ceo.PHOTO_SIZE[0]}" height="{ceo.PHOTO_SIZE[1]}">
+ <figcaption><b>{html.escape(ceo.NAME)}</b><span>{html.escape(ceo.ROLE)}</span></figcaption>
+ </figure>
+ </section>
+ <section class="section ceo-letter"><div class="ceo-letter-body">{letter}</div>
+ <div class="ceo-signoff"><p class="ceo-signoff-name">{html.escape(ceo.NAME)}</p><p class="ceo-signoff-role">{html.escape(ceo.ROLE)}</p>{link("VIEW FULL CV PROFILE",ceo.PROFILE)}</div>
+ </section>'''
+pages['/ceo-message']=('CEO Message | Global Mino',message+cta())
 pages['/operations']=('Operations | Global Mino',hero('Operations','Across Africa.<br>Closer to opportunity.',"Global Mino’s operations connect geological understanding, mineral opportunities and technical expertise across selected African markets.",'sudan')+section('COUNTRY EXPERIENCE','Grounded in African opportunity.',panels(True),'operations')+cta())
 for name,slug,img,title,caps in countries:
  d=PROFILES[slug]
@@ -282,21 +326,32 @@ for i,c in enumerate(countries,1):
  body+=f'<section class="section project-sources"><p class="eyebrow">SOURCES</p><h2>Where this background comes from.</h2><p class="project-sources-intro">Country background on this page is drawn from the publications below. It is general mineral-sector context for {c[0]}, not a description of a Global Mino project, concession or available licence.</p><ul>{sources}</ul></section>'
  body+=section('GALLERY','A perspective from the field.','<figure class="gallery">'+image(c[2])+'</figure>')+cta('Discuss this opportunity',f'/contact?project=project-0{i}')
  pages[f'/projects/project-0{i}']=(f'Project 0{i} | Global Mino',body)
+# The enquiries table constrains `country`, and api/contact.js and server.cjs
+# validate the same values. Ethiopia is left out of this list until
+# supabase/migrations/202609180001_add_ethiopia_country.sql has been applied to
+# the database; offering it sooner would let a visitor submit an enquiry the
+# database then refuses. Add it to all four places together.
+enquiry_countries=[c for c in countries if c[1]!='ethiopia']
 def field(label,name,typ='text',required=False): return f'<label>{label}{" *" if required else ""}<input name="{name}" type="{typ}" {"required" if required else ""} maxlength="200" autocomplete="{dict(name="name",company="organization",email="email",phone="tel").get(name,"off")}"></label>'
-form='<form id="contact-form"><div class="form-heading"><p class="eyebrow">YOUR NEXT OPPORTUNITY</p><h3>Send an enquiry.</h3><p>Tell us where you are working and how we can help.</p></div><div class="form-grid">'+field('Full Name','name',required=True)+field('Company','company')+field('Email','email','email',True)+field('Phone','phone','tel')+'<label>Country *<select name="country" required><option value="">Select a country</option>'+''.join(f'<option value="{c[1]}">{c[0]}</option>' for c in countries)+'<option value="other">Other</option></select></label><label>Area of Interest *<select name="interest" required><option value="">Select an interest</option>'+''.join(f'<option value="{x.lower().replace(" ","-")}">{x}</option>' for x in ['Gold Mining','Mineral Exploration','Mining Consultancy','Investment Opportunity','Partnership','Other'])+'</select></label><label class="full">Message *<textarea aria-describedby="message-hint" name="message" required minlength="10" maxlength="5000" rows="6" placeholder="Tell us about your opportunity, location and the support you need."></textarea><span id="message-hint" class="field-hint">At least 10 characters.</span></label></div><p class="form-note">* Required fields. Your details are used to respond to this enquiry.</p><button class="button gold" type="submit">SEND ENQUIRY <span>↗</span></button><p id="form-status" role="status" aria-live="polite" tabindex="-1"></p><p class="form-note">You can also email <a href="mailto:info@globalmino.com">info@globalmino.com</a> directly.</p></form>'
+form='<form id="contact-form"><div class="form-heading"><p class="eyebrow">YOUR NEXT OPPORTUNITY</p><h3>Send an enquiry.</h3><p>Tell us where you are working and how we can help.</p></div><div class="form-grid">'+field('Full Name','name',required=True)+field('Company','company')+field('Email','email','email',True)+field('Phone','phone','tel')+'<label>Country *<select name="country" required><option value="">Select a country</option>'+''.join(f'<option value="{c[1]}">{c[0]}</option>' for c in enquiry_countries)+'<option value="other">Other</option></select></label><label>Area of Interest *<select name="interest" required><option value="">Select an interest</option>'+''.join(f'<option value="{x.lower().replace(" ","-")}">{x}</option>' for x in ['Gold Mining','Mineral Exploration','Mining Consultancy','Investment Opportunity','Partnership','Other'])+'</select></label><label class="full">Message *<textarea aria-describedby="message-hint" name="message" required minlength="10" maxlength="5000" rows="6" placeholder="Tell us about your opportunity, location and the support you need."></textarea><span id="message-hint" class="field-hint">At least 10 characters.</span></label></div><p class="form-note">* Required fields. Your details are used to respond to this enquiry.</p><button class="button gold" type="submit">SEND ENQUIRY <span>↗</span></button><p id="form-status" role="status" aria-live="polite" tabindex="-1"></p><p class="form-note">You can also email <a href="mailto:info@globalmino.com">info@globalmino.com</a> directly.</p></form>'
 pages['/contact']=('Contact | Global Mino',hero('Let’s Talk','Let’s uncover<br>the next opportunity.','Connect with Global Mino to discuss mining opportunities, mineral exploration and technical consultancy across Africa.','sudan')+'<section class="section contact-layout"><div><p class="eyebrow">GET IN TOUCH</p><h2>A conversation<br>starts here.</h2><address><a href="mailto:info@globalmino.com">info@globalmino.com</a><br><br>Khartoum, Sudan<br><br><a href="https://globalmino.com">globalmino.com</a></address></div>'+form+'</section>')
 pages['/404']=('Page not found | Global Mino',hero('404 / Page not found','A different path<br>to opportunity.','The page you requested could not be found.','sudan')+section('CONTINUE EXPLORING','Find your way forward.',link('RETURN HOME','/','button gold')))
 head=source.split('<body>')[0]
 head=re.sub(r'<link[^>]+(?:fonts.googleapis.com|fonts.gstatic.com)[^>]*>', '', head)
 head=head.replace('</head>', '<link rel="stylesheet" href="/fonts.css"><link rel="preload" href="/assets/fonts/dm-sans-0.woff2" as="font" type="font/woff2" crossorigin></head>')
 for path,(title,body) in pages.items():
- desc=('Global Mino’s occupational health and safety approach for gold mining, mineral exploration and remote field operations.' if path=='/services/occupational-health-safety' else 'Global Mino — '+('mining, mineral exploration and technical consultancy across Sudan, Cameroon and the Central African Republic.' if path=='/' else title.split(' | ')[0]+'. Explore mining, geological knowledge and responsible resource development across Africa.'))
+ desc=('Global Mino’s occupational health and safety approach for gold mining, mineral exploration and remote field operations.' if path=='/services/occupational-health-safety' else 'Global Mino — '+('mining, mineral exploration and technical consultancy across Sudan, Ethiopia, Cameroon and the Central African Republic.' if path=='/' else title.split(' | ')[0]+'. Explore mining, geological knowledge and responsible resource development across Africa.'))
  h=re.sub(r'<title>.*?</title>',lambda m:f'<title>{html.escape(title)}</title>',head)
  h=re.sub(r'<meta name="description"[^>]+>',lambda m:f'<meta name="description" content="{html.escape(desc,quote=True)}">',h)
  h=h.replace('href="style.css"','href="/style.css"').replace('</head>',f'<link rel="stylesheet" href="/pages.css"><link rel="canonical" href="https://globalmino.com{path}"><meta property="og:title" content="{html.escape(title,quote=True)}"><meta property="og:description" content="{html.escape(desc,quote=True)}"><meta property="og:url" content="https://globalmino.com{path}"><meta property="og:type" content="website"><meta property="og:image" content="https://globalmino.com/assets/hero.jpg"></head>')
+ if path=='/': h=h.replace('https://globalmino.com/assets/hero.jpg','https://globalmino.com/assets/hero-gold-mining-v2.jpg')
  if path=='/services/occupational-health-safety': h=h.replace('https://globalmino.com/assets/hero.jpg','https://globalmino.com/assets/ohs-mining-safety.jpg')
  if path.startswith('/countries/'): h=h.replace('</head>', '<link rel="stylesheet" href="/countries.css"></head>')
  if path=='/gallery': h=h.replace('</head>', '<link rel="stylesheet" href="/gallery.css"></head>')
+ if path=='/ceo-message': h=h.replace('</head>', '<link rel="stylesheet" href="/ceo-message.css"></head>')
+ # Keep the brand palette last so it consistently governs every page-specific
+ # stylesheet while src/home.html remains directly previewable.
+ h=h.replace('<link rel="stylesheet" href="/brand.css">','').replace('</head>', '<link rel="stylesheet" href="/brand.css"></head>')
  active=header.replace(f'href="{path}"',f'href="{path}" aria-current="page"')
  if path.startswith('/team/'): active=active.replace('href="/team"','href="/team" aria-current="page"')
  for group in ['countries','services']:

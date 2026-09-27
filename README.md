@@ -21,7 +21,7 @@ npm run check
 npm test
 ```
 
-Browser tests use installed Google Chrome (`channel: 'chrome'`) and cover all 21 concrete pages at 1440, 1280, 1024, 768 and 390 pixels, local links, image loading, accessibility, menus, project filters, contact states and 404 behavior. These implement 15 primary templates, with three placeholder project detail instances. There is no TypeScript or existing lint toolchain.
+Browser tests use installed Google Chrome (`channel: 'chrome'`) and cover all 26 concrete pages at 1440, 1280, 1024, 768 and 390 pixels, local links, image loading, accessibility, menus, project filters, the site visits lightbox, contact states and 404 behavior. Seven of those pages are team CV profiles and three are placeholder project details. There is no TypeScript or existing lint toolchain.
 
 ## Enquiry storage with Supabase
 
@@ -37,9 +37,19 @@ Static-only hosting needs an equivalent `/api/contact` server endpoint and a con
 
 ## Content and photography
 
-Project entries are explicitly marked placeholders. No reserves, production, ownership, licensing or financial figures are invented. The GM wordmark remains the supplied provisional treatment. Images are illustrative, not evidence of Global Mino assets. Credits and licenses remain available on every page. Alaska and Hawaii field images must not be represented as African company operations. Replace with approved company photography when supplied.
+Project entries and the `/gallery` site visit frames are explicitly marked placeholders. No reserves, production, ownership, licensing or financial figures are invented. The GM wordmark remains the supplied provisional treatment. Images are illustrative, not evidence of Global Mino assets. Credits and licenses remain available on every page. Alaska and Hawaii field images must not be represented as African company operations. Replace with approved company photography when supplied.
 
 Page metadata, canonical URLs, sitemap and robots file use `https://globalmino.com`. `dist/style.css` preserves the approved styling; `dist/pages.css` extends it for internal pages and accessible shared navigation.
+
+## Mining site visits gallery
+
+`/gallery` groups field photography by visit, one section per location, each with its location name, visit date, short description and a lightbox that steps through that visit's collection only. `site_visits.py` holds the record.
+
+No field photography has been supplied, so every frame renders as a labelled reserved slot instead of an image, and the page states this in full. To publish a photograph, copy the file into `dist/assets/`, set `src` and a factual `caption` on the matching entry in `site_visits.py`, replace the pending location, date and visiting team values with the confirmed ones, and rebuild. The grid, the frame counts and the lightbox all read that one record. Photo counts of five per visit tile the grid exactly at every breakpoint.
+
+## CEO message
+
+`/ceo-message`, linked from the footer's Company column, carries the message from the Founder & Chief Executive Officer. The text lives in `ceo_message.py` and is reproduced as supplied, with no sentences written to extend it. The supplied copy breaks off mid-word in the final paragraph of the health and safety section, so that paragraph stops at the last complete clause; the module records this. `dist/assets/ceo-portrait.jpg` is the supplied photograph, cropped to the subject at 4:5 — replace the file and `PHOTO_SIZE` together.
 
 ## Supabase environment
 

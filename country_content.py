@@ -157,6 +157,24 @@ GOLD = {
 
 # Concise public profiles. Opportunities are assessment themes, not available assets.
 PROFILES = {
+ 'ethiopia': {
+  'intro': 'Gold across the Arabian\u2013Nubian Shield, pegmatite and evaporite minerals, and scope for exploration and practical mining support.',
+  'minerals': 'Gold \u00b7 Tantalum \u00b7 Potash \u00b7 Opal',
+  'regions': 'Oromia \u00b7 Benishangul-Gumuz \u00b7 Tigray \u00b7 Afar',
+  'gold': 'Ethiopia\u2019s established primary gold mining sits in the Adola belt of the Guji Zone in southern Oromia, where the Lega Dembi and Sakaro deposits occur in Precambrian greenstone rocks of the Arabian\u2013Nubian Shield. Artisanal workings in both alluvial ground and weathered hard rock are widespread across Oromia, Benishangul-Gumuz, Tigray and Gambella, and artisanal and small-scale miners supply much of the gold sold through official channels.',
+  'mining': 'Beyond gold, the documented mineral base includes tantalum and lithium-bearing pegmatites in the Kenticha field of southern Oromia, potash and salt in the Danakil Depression of Afar, soda ash at Lake Abijata, opal in the Wollo highlands of Amhara, and industrial minerals such as limestone, gypsum and marble supplying domestic cement and construction. Power supply, road access and the distance to port at Djibouti shape project economics.',
+  'consideration': 'Confirm licence status and boundaries with the Ministry of Mines and the relevant regional authority before committing to a site. Security conditions, land use and community interests differ substantially between regions and need local assessment kept under review. Water supply, tailings handling and rehabilitation belong in the initial plan rather than a later stage.',
+  'opportunities': [
+   ('Trace gold to its bedrock source', 'Map and sample the greenstone belts of the Arabian\u2013Nubian Shield where artisanal alluvial workings point to a primary source that has not been defined.'),
+   ('Support artisanal and small-scale operations', 'Assess recovery methods, mercury handling, site safety and rehabilitation alongside licensed cooperatives and regional mining offices.'),
+   ('Assess strategic and industrial minerals', 'Review the tantalum and lithium-bearing pegmatite belts and the Danakil evaporite basin against current processing, logistics and market conditions.'),
+  ],
+  'sources': [
+   ('USGS \u00b7 Ethiopia mineral industry (2019)', 'https://pubs.usgs.gov/myb/vol3/2019/myb3-2019-ethiopia.pdf'),
+   ('EITI \u00b7 Ethiopia country page', 'https://eiti.org/countries/ethiopia'),
+  ],
+ },
+
  'sudan': {
   'intro': 'A long history of gold mining, with opportunities that begin with careful geological and operational assessment.',
   'minerals': 'Gold · Chromite · Industrial minerals',

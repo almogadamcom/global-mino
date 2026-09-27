@@ -8,7 +8,7 @@ references are intentionally omitted from the public website.
 TEAM_PROFILES = {
     "huzaifa-ahmed-salih": {
         "name": "Eng. Huzaifa Ahmed Salih Mohamed",
-        "role": "Processing Engineer & Project Manager",
+        "role": "Processing Engineer",
         "photo": "team-huzaifa.jpg",
         "summary": "Chemical engineer with more than six years of professional experience in the cement and mining industry, covering processing and quality control. Since 2024 he has worked as a processing engineer and project manager on assignments across several African countries.",
         "countries": ["Sudan", "Kenya", "Mauritania", "Niger", "Ethiopia"],
@@ -93,7 +93,7 @@ TEAM_PROFILES = {
     },
     "abdelrazig-ahmed": {
         "name": "Eng. Abdelrazig Ahmed Abdelrazig Ahmed",
-        "role": "Project Manager · Technical Consultant · Geologist",
+        "role": "Technical Consultant · Geologist",
         "photo": "team-abdelrazig.jpg",
         "summary": "Geologist and mining professional whose CV records more than 10 years of experience across exploration, technical and administrative supervision, production management, gold-processing systems, mine development and multidisciplinary project management.",
         "countries": ["Sudan", "Kenya", "Guinea", "Mauritania", "Niger"],
@@ -196,7 +196,7 @@ TEAM_PROFILES = {
     },
     "bushra-babiker-ahmed-babiker": {
         "name": "Bushra Babiker Ahmed Babiker",
-        "role": "Accounting · Project Management · Organisational Administration",
+        "role": "Project Manager · Accounting · Organisational Administration",
         "photo": "team-bushra.jpg",
         "summary": "Accounting and project-management professional whose Arabic-language CV records experience in administration, executive-office management, organisational leadership, publishing, training and community organisations in Sudan and Lebanon.",
         "countries": ["Sudan", "Lebanon"],
@@ -229,5 +229,88 @@ TEAM_PROFILES = {
             {"role": "Employee", "company": "Legislative Council of Khartoum State", "location": "Sudan", "date": "2010–2014", "details": []},
         ],
         "affiliations": ["Cultural and Social Secretary, Sudanese community in Lebanon — 2002–2006", "Member of the community committee coordinating with the Sudanese Embassy in Lebanon — 2003–2006", "Member, Third Arab Forum for Education, Beirut — April 2006", "Member, First Forum for Sustainable Education, Beirut — 2006", "Supervisor, Fifth and Sixth Youth Forums for Children of Sudanese Working Abroad — 2006–2007", "Member of the committee supporting the return of Sudanese nationals from Lebanon during the 2006 Lebanon war", "Member, National Union of UNESCO Clubs in Sudan — 2008", "Member, KAFA Sudanese Association for Community Development — 2008"],
+    },
+    "abdalla-adam-younis-mohammed": {
+        "name": "Abdalla Adam Younis Mohammed",
+        "role": "Biotechnology & Humanitarian Partnerships Professional",
+        "photo": "team-abdalla-adam.jpg",
+        "summary": "Biotechnology and microbiology graduate with more than 15 years of professional experience working with national and international organisations. His background includes emergency response, field operations and partnership coordination with non-governmental and international non-governmental organisations.",
+        "countries": ["Sudan"],
+        "education": [
+            {"qualification": "Master's Degree in Disaster Management", "institution": "International University of Africa", "location": "Sudan", "date": "2019"},
+            {"qualification": "Higher Diploma in Disaster Management", "institution": "International University of Africa", "location": "Sudan", "date": "2018"},
+            {"qualification": "Diploma in NGO Management", "institution": "University of Medical Sciences and Technology (UMST)", "location": "Sudan", "date": "2012"},
+            {"qualification": "Bachelor of Science in Biotechnology and Microbiology", "institution": "Omdurman Islamic University", "location": "Sudan", "date": "2009"},
+            {"qualification": "Diploma in English Language", "date": "2015"},
+        ],
+        "experience": [
+            {"role": "Humanitarian and Development Professional", "company": "National and international organisations", "location": "Sudan", "date": "More than 15 years", "details": [
+                "Worked across national and international organisations, including Dawo Alfai Medical, PHF and KPHF.",
+                "Built experience in emergency response and field operations with state and federal health authorities.",
+                "Coordinated partnerships with NGOs and international NGOs.",
+            ]},
+            {"role": "Programme and Field Support", "company": "Kuwaiti Patients Helping Fund", "location": "Sudan", "date": "Six years", "details": [
+                "Supported humanitarian and health-related work within an international non-governmental organisation.",
+            ]},
+            {"role": "Programme Support", "company": "Patients Helping Fund", "location": "Sudan", "date": "Four years", "details": [
+                "Contributed to the work of a national non-governmental organisation.",
+            ]},
+        ],
+        "expertise": ["Humanitarian partnerships", "NGO coordination", "Emergency response", "Field operations", "Disaster management", "Biotechnology", "Microbiology", "Health-sector collaboration"],
+    },
+    "ogba-adam-edris-ali": {
+        "name": "Eng. Ogba Adam Edris Ali",
+        "role": "Civil Engineer",
+        "photo": "team-ogba-adam.jpg",
+        "summary": "Civil-engineering professional with experience in project management, technical supervision, road maintenance, quality control and materials testing. His CV records infrastructure assignments in Sudan and Saudi Arabia spanning municipal roads, public facilities, telecommunications and construction.",
+        "countries": ["Sudan", "Saudi Arabia"],
+        "education": [
+            {"qualification": "Mini Master of Business Administration (Mini MBA)", "institution": "British International Academy", "date": "2026"},
+            {"qualification": "Bachelor's Degree in Civil Engineering", "institution": "Technical University", "date": "2016"},
+            {"qualification": "Diploma in Civil Engineering", "institution": "Sudan University of Science and Technology", "location": "Sudan", "date": "2010"},
+        ],
+        "certifications": [
+            {"title": "Professional Project Management (PMP) Course", "provider": "Vista Languages & Training Centre", "date": "August 2022"},
+            {"title": "English Speaking Course", "provider": "Melody Press International", "date": "March–July 2021"},
+            {"title": "Primavera Diploma", "provider": "Incheon Institute of Computers and Languages", "location": "Sudan", "date": "December 2013–March 2014"},
+            {"title": "PlanSwift Quantity Take-off", "provider": "Incheon Institute of Computers and Languages", "location": "Sudan", "date": "December 2013–March 2014"},
+            {"title": "AutoCAD", "provider": "National Fund for Graduate Employment", "location": "Sudan", "date": "July 2012"},
+            {"title": "ArchiCAD", "provider": "National Fund for Graduate Employment", "location": "Sudan", "date": "September 2012"},
+        ],
+        "experience": [
+            {"role": "Project Manager", "company": "Al-Amro Engineering Consultancy Group", "location": "Eastern Province, Saudi Arabia", "date": "January 2024–present", "details": ["Oversees Ministry of Transport and Logistics Services road-maintenance operations connecting cities in the Eastern Province."]},
+            {"role": "Quality Control Professional", "company": "Al-Amro Engineering Consultancy Group", "location": "Al-Ahsa, Saudi Arabia", "date": "October 2021–December 2023", "details": ["Followed soil, concrete and asphalt testing for municipal road, pavement and lighting projects.", "Supported technical supervision of urban-road network development projects."]},
+            {"role": "Quality Control Professional", "company": "Al-Amro Engineering Consultancy Group", "location": "Eastern Province, Saudi Arabia", "date": "January 2019–July 2021", "details": ["Supported technical supervision and quality control for municipal roads, public buildings, garages and warehouses across several municipalities."]},
+            {"role": "Site Engineer", "company": "Waad Al Tameer General Contracting", "location": "Dammam and Khobar, Saudi Arabia", "date": "December 2016–December 2018", "details": ["Worked on excavation, installation and extension of a fibre-optic network for an ITC telecommunications project."]},
+            {"role": "Materials / QA-QC Engineer", "company": "Madarat Engineering Consultancy", "location": "Turaif, Saudi Arabia", "date": "March 2014–April 2016", "details": ["Supported quality control and supervision for asphalt, civic-centre, flood-protection and rainwater-drainage projects."]},
+            {"role": "Site Engineer", "company": "Aba Civil Engineering", "location": "Khartoum, Sudan", "date": "December 2012–January 2014", "details": ["Supported construction and supervision of a three-storey building together with maintenance and finishing projects."]},
+        ],
+        "expertise": ["Project management", "Civil engineering", "Road maintenance", "Infrastructure supervision", "Quality assurance and quality control", "Soil, concrete and asphalt testing", "AutoCAD", "ArchiCAD", "Primavera", "PlanSwift"],
+    },
+    "ezzeldin-ali-suleiman-omar": {
+        "name": "Eng. Ezzeldin Ali Suleiman Omar",
+        "role": "Civil Engineer & Infrastructure Supervisor",
+        "photo": "team-ezzeldin-ali.jpg",
+        "summary": "Civil engineer with professional experience in roads, bridges, public infrastructure and municipal-project supervision. His CV records assignments with government authorities in Sudan and an engineering consultancy in Saudi Arabia.",
+        "countries": ["Sudan", "Saudi Arabia"],
+        "education": [
+            {"qualification": "Diploma in Civil Engineering — Roads and Transport", "institution": "Sudan University of Science and Technology", "location": "Sudan"},
+        ],
+        "certifications": [
+            {"title": "AutoCAD 2D"},
+            {"title": "Civil 3D"},
+            {"title": "Primavera Project Management"},
+            {"title": "Total Station and GPS for Construction"},
+            {"title": "Land Surveying", "provider": "Sudan University of Science and Technology", "date": "October 2009"},
+            {"title": "Applied Computer Programs", "date": "July–October 2008"},
+        ],
+        "experience": [
+            {"role": "Infrastructure and Materials Supervisor", "company": "Ministry of Physical Planning and Public Utilities — Roads and Bridges Department", "location": "White Nile State, Sudan", "date": "October 2018–present, as stated in the CV", "details": ["Supervises public works projects, roads, bridges and materials testing."]},
+            {"role": "Civil Engineering Supervisor", "company": "Madarat Engineering Consultancy", "location": "Northern Borders, Saudi Arabia", "date": "May 2014–August 2017", "details": ["Supervised municipal, public-infrastructure and laboratory work in Arar and Turaif."]},
+            {"role": "Roads, Bridges and Materials Supervisor", "company": "Ministry of Physical Planning and Public Utilities", "location": "Sudan", "date": "March 2010–February 2014", "details": ["Worked with the Roads and Bridges Department on supervision of roads and construction materials."]},
+            {"role": "Engineering Trainee", "company": "SMIC Consultancy", "location": "Sudan", "date": "October–December 2010", "details": ["Completed practical training on the Roseires Reservoir project."]},
+        ],
+        "affiliations": ["Sudanese Engineering Council"],
+        "expertise": ["Civil engineering", "Roads and bridges", "Infrastructure supervision", "Materials testing", "Municipal projects", "AutoCAD 2D", "Civil 3D", "Primavera", "Total Station", "GPS surveying"],
     },
 }

@@ -33,8 +33,16 @@ VISITS = [
         'date': PENDING_DATE,
         'party': PENDING_PARTY,
         'focus': 'Gold mining and mineral opportunity assessment',
-        'description': 'Global Mino’s work in Sudan centres on gold mining and mineral opportunity assessment. Photographs from the team’s visits to Sudanese mining locations will be published in this section once they are supplied, together with the site name, the date of the visit and a short account of the work carried out.',
-        'photos': slots(5),
+        'description': 'Global Mino’s work in Sudan centres on gold mining and mineral opportunity assessment. The photographs below were taken during a team visit to a Sudanese mining and processing site. The specific location, the date of the visit and the names of those present are still to be confirmed.',
+        'photos': [
+            {'src': 'visits/sudan-01.jpg', 'caption': 'The visiting group beside a lined pond at the site.'},
+            # Two faces in sudan-02 are masked at the company's request; the unedited
+            # original is in the supplied photo folder, not in the repository.
+            {'src': 'visits/sudan-02.jpg', 'caption': 'Standing on the pond liner, with the excavated ground behind.'},
+            {'src': 'visits/sudan-03.jpg', 'caption': 'Beside the tanks on the processing line.'},
+            {'src': 'visits/sudan-04.jpg', 'caption': 'On the haul road, with tipper trucks behind.'},
+            {'src': 'visits/sudan-05.jpg', 'caption': 'In conversation under the equipment shelter.'},
+        ],
     },
     {
         'slug': 'cameroon',
@@ -43,8 +51,12 @@ VISITS = [
         'date': PENDING_DATE,
         'party': PENDING_PARTY,
         'focus': 'Geological mapping and field exploration',
-        'description': 'Work in Cameroon centres on geological mapping, field exploration and mineral resource intelligence. This section is reserved for photographs taken during the team’s visits to Cameroonian mining locations, with the site name, visit date and description added when the record is confirmed.',
-        'photos': slots(5),
+        'description': 'Work in Cameroon centres on geological mapping, field exploration and mineral resource intelligence. The photographs below were taken as the team arrived in the country; photographs from the sites themselves have not been supplied yet. The location, the date of the visit and the names of those present are still to be confirmed.',
+        'photos': [
+            {'src': 'visits/cameroon-01.jpg', 'caption': 'Arriving on the apron.'},
+            {'src': 'visits/cameroon-02.jpg', 'caption': 'Leaving the aircraft at the head of the airstairs.'},
+            {'src': 'visits/cameroon-03.jpg', 'caption': 'On the apron after landing.'},
+        ],
     },
     {
         'slug': 'central-african-republic',
@@ -53,7 +65,12 @@ VISITS = [
         'date': PENDING_DATE,
         'party': PENDING_PARTY,
         'focus': 'Mineral exploration and geological assessment',
-        'description': 'Work in the Central African Republic centres on mineral exploration and geological assessment. Photographs from field visits to mining locations in the country will appear here, each with the location, the date of the visit and a caption describing what is shown.',
-        'photos': slots(5),
+        'description': 'Work in the Central African Republic centres on mineral exploration and geological assessment. The photographs below were taken during a team visit to a mining camp in the country. The specific location, the date of the visit and the names of those present are still to be confirmed.',
+        'photos': [
+            {'src': 'visits/car-01.jpg', 'caption': 'On the track to the site, at the edge of cultivated ground.'},
+            {'src': 'visits/car-02.jpg', 'caption': 'In discussion with a worker on the camp ground.'},
+            {'src': 'visits/car-03.jpg', 'caption': 'Talking with workers beside the shelters after rain.'},
+            {'src': 'visits/car-04.jpg', 'caption': 'Tarpaulin shelters and covered loads across the camp.'},
+        ],
     },
 ]

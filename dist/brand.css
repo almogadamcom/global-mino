@@ -1,0 +1,283 @@
+/* Global Mine brand system — supplied final logo and requested palette. */
+:root {
+  --ink: #0B5844;
+  --charcoal: #084838;
+  --gold: #B88A2B;
+  --warm: #B88A2B;
+  --paper: #FAF9F6;
+  --stone: #DDD8CE;
+  --site-dark: #0B5844;
+  --site-muted: #52655f;
+  --site-line: #dfe4e0;
+}
+
+body { background: var(--paper); color: #28483f; }
+main h1,
+main h2,
+main h3,
+dialog h2 { color: #0B5844; }
+
+/* Official supplied wordmark. */
+.brand { flex: 0 0 auto; line-height: 1; }
+.brand-logo { display: block; width: 206px; height: auto; object-fit: contain; }
+footer .brand-logo { width: 198px; }
+
+/* Gold is the primary action and accent colour. */
+.gold { background: #B88A2B; color: #fff; }
+.gold:hover { background: #966f22; }
+.header-cta { border-color: #B88A2B; }
+.header-cta span,
+.hero-bottom i,
+.country-link b,
+.section-top .eyebrow,
+.service-copy .eyebrow,
+.project > .eyebrow { color: #B88A2B; }
+.text-link { border-bottom-color: #B88A2B; }
+.section-top::after { background: #B88A2B55; }
+.about-image::before { background: #B88A2B; }
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible { outline-color: #B88A2B; }
+
+/* Clean neutrals and dark-green structural surfaces. */
+.services,
+.team-section,
+.ohs-soft,
+.ohs-emergency,
+.ohs-compliance { background: #F4F4F1; }
+.operations,
+.projects,
+.contact,
+.site-hero,
+.member-hero,
+.profile-hero,
+.ceo-hero,
+.visits,
+.ohs-dark,
+.ohs-health,
+.ohs-kpi { background-color: #0B5844; }
+/* The OHS banner sits directly under the green hero; a deeper green separates them. */
+.home-banner { background-color: #084838; }
+header.solid,
+nav details .dropdown { background: #0B5844; }
+.contact-intro {
+  background: linear-gradient(90deg, #0B5844ed, #0B584485), url('assets/sudan.jpg') center 60% / cover;
+}
+
+/* Headings on dark-green and photographic surfaces remain legible. */
+.hero h1,
+.operations h2,
+.country h3,
+.projects h2,
+.project h3,
+.contact h2,
+.site-hero h1,
+.member-hero h1,
+.member-hero h2,
+.profile-hero h1,
+.ceo-hero h1,
+.visit h2,
+.ohs-hero h1,
+.ohs-dark h2,
+.ohs-dark h3,
+.ohs-health h2,
+.ohs-health h3,
+.ohs-kpi h2,
+.ohs-kpi h3,
+.home-banner h2,
+.leadership-profile h3 { color: #fff; }
+.hero h1 em,
+.site-hero h1 em,
+.member-hero h1 em,
+.ceo-hero h1 em,
+.ohs-hero h1 em,
+.home-banner h2 em { color: #D8B75F; }
+
+.footer-grid h4,
+.contact-intro > .eyebrow,
+.ohs-dark .eyebrow,
+.ohs-health .eyebrow,
+.ohs-kpi .eyebrow,
+.visit-headline .eyebrow,
+.ceo-hero-copy .eyebrow { color: #D8B75F; }
+
+/* Replace legacy brown accent shades with the single primary gold. */
+.safety-no,
+.profile-label,
+.profile-content .eyebrow,
+.member-role,
+.team-education span,
+.credential-meta,
+.ohs-icon,
+.ohs-flow span,
+.ppe-list span,
+.compliance-layers span,
+.kpi-grid span,
+.environment-bands strong,
+.ceo-signoff-role { color: #8a651b; }
+
+dialog a { color: #745714; }
+
+@media (max-width: 760px) {
+  .brand-logo { width: 178px; }
+  nav { background: #0B5844; }
+}
+
+/* Contrast corrections. The accent gold #B88A2B stays on fills, borders and
+   marks; where gold or grey is used as TEXT it shifts to a lighter tint on the
+   dark-green surfaces and a deeper tint on the light neutrals, so every
+   foreground/background pair clears WCAG AA. */
+:root {
+  --warm: #E4C77E;
+  --gold-on-dark: #E4C77E;
+  --gold-on-light: #7A5A16;
+  --text-on-dark: #D5DBD8;
+  --text-on-light: #4B5A55;
+}
+.gold { background: #B88A2B; color: #101419; }
+.gold:hover { background: #C99C35; color: #101419; }
+.section-top .eyebrow,
+.service-copy .eyebrow,
+.service-no,
+.type-grid .eyebrow,
+.detail-block .eyebrow,
+.form-heading .eyebrow,
+.project-sources > .eyebrow,
+.ohs-reporting .eyebrow,
+.ohs-environment .eyebrow { color: var(--gold-on-light); }
+.operations .section-top .eyebrow,
+.projects .section-top .eyebrow,
+.contact-intro > .eyebrow,
+.footer-grid h4,
+.hero-bottom i,
+.country-link b,
+.project > .eyebrow,
+.listing .project .eyebrow,
+.kpi-grid span,
+.ohs-dark .eyebrow,
+.ohs-health .eyebrow,
+.ohs-kpi .eyebrow,
+.ceo-portrait span,
+nav [aria-current=page],
+nav a:hover,
+nav .current-group summary,
+.dropdown a > span { color: var(--gold-on-dark); }
+.footer-brand p,
+.footer-grid a,
+.footer-bottom span,
+.footer-bottom a,
+.footer-bottom button,
+#filter-status,
+.listing .project p,
+.kpi-disclaimer,
+.home-banner-copy p { color: var(--text-on-dark); }
+.about-grid p,
+.service-copy p,
+.intro-copy,
+.type-grid article > p + p,
+.profile-sources summary { color: var(--text-on-light); }
+/* Specificity matches the base rules these override. */
+.footer-grid > div > a:not(.brand),
+.footer-grid p,
+.footer-bottom,
+.footer-bottom button { color: var(--text-on-dark); }
+.project > p:not(.eyebrow),
+.home-banner-actions > span { color: var(--text-on-dark); }
+.about-copy > p,
+.service-copy > p:not(.eyebrow),
+.contact-intro > p:not(.eyebrow) { color: var(--text-on-light); }
+.contact-intro > p:not(.eyebrow) { color: #dfe6e3; }
+.service-copy .eyebrow { color: var(--gold-on-light); }
+.visit-headline .eyebrow,
+.footer-grid h4,
+.member-hero .member-role { color: var(--gold-on-dark); }
+.ceo-hero-copy .eyebrow,
+.ohs-dark .eyebrow,
+.ohs-health .eyebrow,
+.ohs-kpi .eyebrow,
+.contact-intro > .eyebrow { color: var(--gold-on-dark); }
+
+/* White and gold content palette. Green is reserved for site navigation/footer. */
+:root {
+  --ink: #29251e;
+  --charcoal: #f8f5ed;
+  --paper: #ffffff;
+  --stone: #e5dccb;
+  --site-dark: #fff;
+  --site-muted: #615b50;
+  --site-line: #e5dccb;
+  --text-on-light: #565044;
+  --warm: #a47820;
+}
+body { background:#fff; color:#29251e; }
+#main :is(h1,h2,h3), dialog h2 { color:#29251e; }
+#main .country h3, #main .ohs-hero h1 { color:#fff; }
+#main .ohs-hero h1 em { color:#e4c77e; }
+#main nav { background:#fff; }
+header, header.solid, header:has(nav.open), header nav,
+header nav details .dropdown, footer { background:#0b5844; color:#fff; }
+header { --warm:#e4c77e; }
+footer { --warm:#e4c77e; }
+footer .footer-grid h4 { color:#e4c77e; }
+
+#main :is(.site-hero,.member-hero,.profile-hero,.ceo-hero,.operations,.projects,
+ .visits,.home-banner,.contact,.contact-intro,.ohs-dark,.ohs-health,.ohs-kpi,
+ .leadership-profile) { background:#fff; color:#29251e; }
+#main :is(.services,.team-section,.ohs-soft,.ohs-emergency,.ohs-compliance) { background:#faf7ef; }
+#main :is(.site-hero,.member-hero,.profile-hero,.ceo-hero,.home-banner,.contact-intro,
+ .ohs-dark,.ohs-health,.ohs-kpi,.leadership-profile) :is(h1,h2,h3) { color:#29251e; }
+#main :is(.operations,.projects,.visits) > :is(h2,.section-heading) h2,
+#main :is(.operations,.projects,.visits)>h2,
+#main .visit h2, #main .project h3 { color:#29251e; }
+#main :is(.site-hero-heading,.member-heading,.profile-heading,.ceo-hero-copy,
+ .home-banner-copy,.contact-intro,.leadership-profile,.ohs-dark,.ohs-health,.ohs-kpi)
+ :is(p,.breadcrumb,.breadcrumb a,.home-banner-actions>span,small) { color:#565044; }
+#main :is(.site-hero,.member-hero,.profile-hero,.ceo-hero,.home-banner) em { color:#88621a; }
+#main :is(.section-top,.site-hero-heading,.member-heading,.profile-heading,.ceo-hero-copy,
+ .home-banner-copy,.contact-intro,.ohs-dark,.ohs-health,.ohs-kpi,.visit-headline) .eyebrow,
+#main .project>.eyebrow, #main .listing .project .eyebrow,
+#main .member-role, #main .leadership-profile .team-role,
+#main .leadership-profile .team-education span, #main .ceo-portrait span { color:#7a5a16; }
+#main :is(.section-heading>p,.project>p:not(.eyebrow),.listing .project p,
+ .visit-copy,.visit-meta dt,.visit-meta dd,.kpi-disclaimer,#filter-status) { color:#565044; }
+#main :is(.site-hero,.profile-hero,.home-banner,.contact-intro,.leadership-profile) .text-link { color:#71521a; }
+#main .section-top::after { background:#d8c59d; }
+#main :is(.ceo-company,.team-education,.visit-meta,.visit,.health-matrix article,.kpi-grid article) { border-color:#e5dccb; }
+#main .ohs-dark .ohs-card-grid { background:#e5dccb; }
+#main .ohs-dark .ohs-card { background:#faf7ef; }
+#main .ohs-icon, #main .kpi-grid span { color:#7a5a16; }
+#main .health-matrix :is(strong,span), #main .kpi-grid :is(h3,p) { color:#565044; }
+#main .kpi-grid { background:#e5dccb; }
+#main .kpi-grid article { background:#faf7ef; }
+#main .ohs-equipment-strip { background:#faf7ef; color:#565044; border-color:#e5dccb; }
+#main .ohs-equipment-strip :is(p,li) { color:#565044; border-color:#d8c59d; }
+#main .improvement-loop li::before { color:#7a5a16; }
+#main .improvement-loop li { color:#71521a; border-color:#d8c59d; }
+#main .filters button { color:#29251e; border-color:#c9b583; }
+#main .filters button[aria-pressed=true] { background:#b88a2b; color:#17140e; }
+#main .contact-intro { background:linear-gradient(110deg,#fff 15%,#f5eddc); border-top:1px solid #dfcda3; }
+#main .home-banner { border-block:1px solid #e5dccb; }
+#main .home-banner-media::after { background:linear-gradient(90deg,transparent 65%,#fff); }
+#main .leadership-profile { border:1px solid #e5dccb; }
+#main .leadership-profile .team-portrait::after { background:none; }
+#main .home-site-hero { background:#fff; }
+#main .home-site-hero::before { background:linear-gradient(115deg,#fff 45%,#f6efdf); }
+#main .home-site-hero .site-hero-heading h1 { color:#29251e; }
+#main .home-site-hero .site-hero-heading h1 em { color:#88621a; }
+#main .home-site-hero .site-hero-copy { color:#565044; }
+#main .home-site-hero .button { box-shadow:0 12px 30px #98722320; }
+#main .home-site-hero .site-hero-photo { box-shadow:0 24px 60px #57442224; }
+#main .home-site-hero .site-hero-photo::before { background:linear-gradient(180deg,transparent 48%,#231a0ecc); }
+#main .home-hero-rail { border-color:#d8c59d; color:#615032; }
+#main .home-hero-rail :is(p,a,a span) { color:#71521a; }
+#main .home-site-hero+.about { background:#fff; }
+#main .about-image { box-shadow:0 20px 50px #57442214; }
+#main #operations .country::after { background:linear-gradient(0deg,#21190eed, #21190e22 72%); }
+.gold { background:#b88a2b; color:#17140e; }
+.gold:hover { background:#c99c35; color:#17140e; }
+.contact:has(>footer) { background:#0b5844; }
+@media(max-width:700px) {
+ #main .home-site-hero { display:grid; grid-template-columns:1fr; gap:28px; padding-bottom:105px; }
+ #main .home-site-hero .site-hero-photo { position:relative; z-index:0; inset:auto; height:250px; width:100%; opacity:1; transform:none; }
+ #main .home-banner-media::after { background:linear-gradient(180deg,transparent 75%,#fff); }
+}
