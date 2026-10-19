@@ -1,0 +1,11 @@
+# Files the Vercel CLI must never upload from a local deploy. Git deploys
+# already exclude them (they are in .gitignore); the CLI does not read
+# .gitignore, and it uploads .env unless told otherwise.
+.env
+.env.*
+node_modules
+test-results
+playwright-report
+__pycache__
+i18n/_missing-*.json
+i18n/_unused-*.json
