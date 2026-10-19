@@ -115,6 +115,7 @@ employees=[
  ('Eng. Abdelrazig Ahmed Abdelrazig Ahmed','Technical Consultant & Geologist','A geologist and mining professional with more than 10 years of experience across exploration, production, processing systems, technical consulting and mining-project management.','team-abdelrazig.jpg','abdelrazig-ahmed','B.Sc. Geology, specialising in Petroleum Geology, College of Petroleum and Minerals, Al-Neelain University'),
  ('Eng. Huzaifa Ahmed Salih Mohamed','Processing Engineer','A chemical engineer with more than six years of experience across cement and mining operations, specialising in mineral processing, production quality control and project delivery. He spent three years with Ariab Mining Company, the largest mining company in Sudan.','team-huzaifa.jpg','huzaifa-ahmed-salih','B.Sc. (Honours) in Chemical Engineering'),
  ('Dr. Rawi Elamin','Public Health Epidemiologist','A public health epidemiologist and global health security specialist with 16 years of experience supporting the World Health Organization (WHO) and national Ministries of Health across multiple regions.','team-rawi.jpg','rawi-elamin','MPH Epidemiology & Biostatistics, American University of Beirut · B.Sc. Public Health, University of Bahri'),
+ ('Dr. Mona Mohammed','Public & Environmental Health Specialist','A multidisciplinary public and environmental health professional with more than 10 years of experience, focused on occupational health and safety and EHS/HSE management, alongside epidemiology and disease prevention.',None,'mona-mohammed','M.Sc. Public & Environmental Health, University of Gezira · B.Sc. Health & Environmental Sciences, University of Gezira'),
  ('Bushra Babiker Ahmed Babiker','Project Manager','An accounting and project management professional with experience in administration, organisational leadership, publishing and community organisations in Sudan and Lebanon.','team-bushra.jpg','bushra-babiker-ahmed-babiker','MBA Project Management, Sudan International University · B.Sc. Accounting, Omdurman Islamic University'),
  ('Dr. Ahmed Omar','Medical Doctor & Public Health Professional','A medical doctor and public health professional advancing stronger, data-led health systems across Africa and the Caribbean.','team-ahmed-omar.jpg',None,'MPH, KIT Royal Tropical Institute and Vrije Universiteit Amsterdam'),
  ('Dr. Shaker Adam Idrees','Medical Doctor — Emergency & Occupational Medicine','A medical doctor with experience in emergency medicine, occupational medicine and public health across Sudan, Libya and Saudi Arabia since 2009.','team-shaker.jpg','shaker-adam-idrees','MBBS, University of Gadarif · Higher Diploma in Clinical Documentation Improvement, Capilano Consulting Center · Diploma in Occupational Medicine, Royal College of Physicians of Ireland'),
@@ -122,13 +123,20 @@ employees=[
  ('Eng. Ogba Adam Edris Ali','Civil Engineer','A civil-engineering professional with experience in project management, infrastructure supervision, quality control, road maintenance and materials testing across Sudan and Saudi Arabia.','team-ogba-adam.jpg','ogba-adam-edris-ali','B.Sc. Civil Engineering · Mini MBA, British International Academy'),
  ('Eng. Ezzeldin Ali Suleiman Omar','Civil Engineer & Infrastructure Supervisor','A civil engineer whose experience spans roads, bridges, public infrastructure, materials supervision and municipal projects in Sudan and Saudi Arabia.','team-ezzeldin-ali.jpg','ezzeldin-ali-suleiman-omar','B.Sc. Civil Engineering — Roads & Transport, Sudan University of Science and Technology'),
 ]
+def portrait(cls,name,photo,lazy=False):
+ # A member without a supplied photograph gets an initials tile, hidden from
+ # screen readers since the name is already the heading beside it.
+ if not photo:
+  initials=''.join(w[0] for w in re.sub(r'^(Dr|Eng)\.\s+','',name).split()[:2]).upper()
+  return f'<figure class="{cls} portrait-initials" aria-hidden="true"><span>{initials}</span></figure>'
+ return f'<figure class="{cls}"><img src="/assets/{photo}" alt="Portrait of {html.escape(name)}"'+(' loading="lazy"' if lazy else '')+'></figure>'
 def team_education(text):
  return f'<p class="team-education"><span>Education</span>{html.escape(text)}</p>' if text else ''
 def team_bio(content):
  paragraphs=content if isinstance(content,list) else [content]
  return '<div class="team-bio">'+''.join(f'<p>{html.escape(paragraph)}</p>' for paragraph in paragraphs)+'</div>'
 team_cards=''.join(f'''<article class="team-card{' leadership-profile' if i==1 else ''}">
- <figure class="team-portrait"><img src="/assets/{photo}" alt="Portrait of {html.escape(name)}" loading="lazy"></figure>
+ {portrait('team-portrait',name,photo,True)}
  <div class="team-card-body"><h3>{html.escape(name)}</h3><p class="team-role">{html.escape(role)}</p>{team_bio(bio)}{team_education(edu)}{link('VIEW FULL CV PROFILE','/team/'+slug) if slug else ''}</div>
 </article>''' for i,(name,role,bio,photo,slug,edu) in enumerate(employees,1))
 team=hero('Our Team','Knowledge in the field.<br><em>Leadership with purpose.</em>','Meet the people guiding Global Mino’s work across mining, mineral exploration and technical consultancy.','geologist')
@@ -142,7 +150,7 @@ def profile_tags(items):
 def member_profile(slug,data):
  body=f'''<section class="member-hero">
  <div class="member-heading"><div class="breadcrumb"><a href="/team">Our team</a><span aria-hidden="true">/</span><span>{html.escape(data['name'])}</span></div><p class="eyebrow">PROFESSIONAL PROFILE</p><h1>{html.escape(data['name'])}</h1><p class="member-role">{html.escape(data['role'])}</p><p class="member-summary">{html.escape(data['summary'])}</p></div>
- <figure class="member-photo"><img src="/assets/{data['photo']}" alt="Portrait of {html.escape(data['name'])}"></figure>
+ {portrait('member-photo',data['name'],data['photo'])}
  </section>
  <nav class="member-nav" aria-label="Profile sections"><a href="#education">Education</a><a href="#experience">Experience</a>{'<a href="#certifications">Certifications</a>' if data.get('certifications') else ''}</nav>
  <div class="member-profile-content">
