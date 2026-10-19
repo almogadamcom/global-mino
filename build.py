@@ -4,9 +4,10 @@ from country_content import INFO, GOLD, PROFILES
 from team_profiles import TEAM_PROFILES
 from site_visits import VISITS
 import ceo_message as ceo
+import i18n
 root=Path(__file__).parent
 out=root/'dist'
-source=(root/'src/home.html').read_text()
+source=(root/'src/home.html').read_text(encoding='utf-8')
 countries=[('Sudan','sudan','sudan','Gold Mining & Mineral Opportunities','Gold Mining|Mineral Exploration|Geological Services|Mining Consultancy|Technical Support|Responsible Resource Development'),('Cameroon','cameroon','cameroon','Geological Intelligence & Mineral Opportunity Development','Geological Mapping|Mineral Resource Intelligence|Mining Concession Identification|License & Legal Status Verification|Field Exploration|Sampling|Geochemical Investigation|Geophysical Investigation|Exploration Target Development|Prospective Area Identification|ASM Opportunity Assessment|GIS & Digital Deliverables|Technical Opportunity Reports'),('Central African Republic','central-african-republic','fieldwork','Mineral Exploration & Mining Opportunities','Mineral Exploration|Mining Consultancy|Geological Assessment|Opportunity Identification|Technical Support|Responsible Resource Development'),('Ethiopia','ethiopia','hero','Gold, Industrial & Strategic Minerals','Mineral Exploration|Gold Mining|Geological Assessment|Mining Consultancy|Technical Support|Responsible Resource Development')]
 services=[('Gold Mining','gold-mining','hero','Developing opportunity.<br>Creating responsible value.','Mining Opportunity Assessment|Technical Evaluation|Mining Development Support|Operational Advisory|Safety Considerations|Environmental Considerations|Responsible Resource Development','Opportunity|Assessment|Planning|Development|Operations Support'),('Mineral Exploration','mineral-exploration','geologist','Understanding what<br>lies beneath.','Geological Mapping|Reconnaissance|Field Mapping|Rock Sampling|Soil Sampling|Stream Sediment Sampling|Trenching|Geochemical Investigation|Geophysical Investigation|Historical Data Review|Target Generation|Prospective Area Ranking','Field|Sample|Analysis|Interpretation|Target|Opportunity'),('Mining Consultancy','mining-consultancy','fieldwork','Technical insight.<br>Strategic perspective.','Technical Advisory|Geological Assessment|Opportunity Evaluation|Mining Project Evaluation|Risk Assessment|Operational Support|Investment Intelligence|Market Entry Support|Regulatory Coordination Support|Environmental Considerations|Occupational Health & Safety','Context|Assessment|Technical Review|Recommendation'),('Occupational Health & Safety','occupational-health-safety','fieldwork','Protecting people.<br>Strengthening operations.','Occupational Health Services|Health Risk Assessments|Health Surveillance|Industrial Hygiene|Emergency Preparedness|Dynamic Risk Management','Assess|Measure|Control|Monitor|Respond|Improve')]
 alts={'hero':'Illustrative terraced open-pit mine','sudan':'Arid landscape south of Port Sudan','cameroon':'Rainforest in Bodiman, Cameroon','geologist':'Illustrative granite examination in Alaska','fieldwork':'Illustrative geophysical field survey in Hawaii'}
@@ -16,7 +17,7 @@ def dropdown(label,items,base):
  return '<details data-navigation-group="'+base+'"><summary>'+label+'</summary><div class="dropdown"><p class="eyebrow">'+label.upper()+'</p>'+''.join(f'<a href="/{base}/{x[1]}">{x[0]}<small>{("Gold Mining & Exploration" if x[1]=="sudan" else "Mineral Exploration & Consultancy") if base=="countries" else x[3].replace("<br>"," ")}</small><span>Explore {x[0]} ↗</span></a>' for x in items)+(link('ALL SERVICES','/services') if base=='services' else '')+'</div></details>'
 header=re.search(r'<header.*?</header>',source).group()
 nav='<nav id="main-navigation" aria-label="Main navigation">'+''.join(f'<a href="{p}">{n}</a>' for n,p in [('Home','/'),('About','/about'),('Team','/team'),('Operations','/operations'),('Gallery','/gallery')])+dropdown('Countries',countries,'countries')+dropdown('Services',services,'services')+link('Projects','/projects','nav-link')+link('Contact','/contact','nav-link')+'</nav>'
-header=re.sub(r'<nav.*?</nav>',lambda m:nav,header).replace('href="#home"','href="/"').replace('href="#contact"','href="/contact"').replace('class="menu-toggle"','class="menu-toggle" aria-controls="main-navigation"')
+header=re.sub(r'<nav.*?</nav>',lambda m:nav,header).replace('href="#home"','href="/"').replace('href="#contact"','href="/contact"').replace('class="menu-toggle"','class="menu-toggle" aria-controls="main-navigation"').replace('<button class="menu-toggle"','<!--lang-switch--><button class="menu-toggle"')
 footer=re.search(r'<footer>.*?</footer>',source).group()
 credits=re.search(r'<dialog id="credits-dialog".*?</dialog>',source).group()
 paths={'home':'/','about':'/about','team':'/team','operations':'/operations','gallery':'/gallery','services':'/services','projects':'/projects','contact':'/contact','sudan':'/countries/sudan','cameroon':'/countries/cameroon','car':'/countries/central-african-republic','gold-mining':'/services/gold-mining','exploration':'/services/mineral-exploration','consultancy':'/services/mining-consultancy','project-list':'/projects'}
@@ -61,15 +62,25 @@ def projects():
 pages={}
 home=re.search(r'<main>(.*?)</main>',source,re.S).group(1)
 home=routes(home)
-home_hero='''<section class="site-hero home-site-hero" id="home">
- <div class="home-hero-glow" aria-hidden="true"></div>
- <div class="site-hero-heading">
-  <p class="eyebrow"><span></span>AFRICA-FOCUSED MINING &amp; EXPLORATION</p>
-  <h1>Unlocking Africa’s<br><em>mineral potential.</em></h1>
-  <p class="site-hero-copy">Global Mino brings geological knowledge, field intelligence and technical consultancy together to move mineral opportunities forward responsibly.</p>
-  <div class="actions"><a class="button gold" href="/operations">EXPLORE OUR OPERATIONS <span>↗</span></a><a class="text-link light" href="/services">DISCOVER OUR EXPERTISE <span>↗</span></a></div>
- </div>
- <figure class="site-hero-photo" role="img" aria-label="Illustrative open-pit gold mining landscape" style="background-image:url(/assets/hero-gold-mining-v2.jpg)"><figcaption><span>GOLD MINING</span><b>Illustrative mining perspective</b></figcaption></figure>
+# Home hero: two image panels side by side (company introduction and the
+# occupational health & safety framework) over the approach rail; home.css.
+home_hero='''<section class="home-split" id="home">
+ <article class="home-split-panel" style="--panel-image:url(/assets/hero-gold-mining-v2.jpg)" aria-labelledby="home-title">
+  <div class="home-split-copy">
+   <p class="eyebrow"><span></span>AFRICA-FOCUSED MINING &amp; EXPLORATION</p>
+   <h1 id="home-title">Unlocking Africa’s<br><em>mineral potential.</em></h1>
+   <p>Global Mino brings geological knowledge, field intelligence and technical consultancy together to move mineral opportunities forward responsibly.</p>
+   <div class="actions"><a class="button gold" href="/operations">EXPLORE OUR OPERATIONS <span>↗</span></a><a class="text-link" href="/services">DISCOVER OUR EXPERTISE <span>↗</span></a></div>
+  </div>
+ </article>
+ <article class="home-split-panel ohs-home-banner" style="--panel-image:url(/assets/ohs-mining-safety.jpg);--panel-position:82% center" aria-labelledby="home-ohs-title">
+  <div class="home-split-copy">
+   <p class="eyebrow"><span></span>OCCUPATIONAL HEALTH &amp; SAFETY</p>
+   <h2 id="home-ohs-title">Every person.<br><em>Every task. Every shift.</em></h2>
+   <p>A practical framework for managing critical risks, protecting worker health and preparing mining and exploration teams to respond when conditions change.</p>
+   <div class="actions">'''+link('EXPLORE OUR OHS APPROACH','/services/occupational-health-safety','button gold')+'''<span class="home-split-note">Mining · Exploration · Field Operations</span></div>
+  </div>
+ </article>
  <div class="home-hero-rail" aria-label="Our approach"><p>AFRICAN PERSPECTIVE</p><p>FIELD-LED KNOWLEDGE</p><p>RESPONSIBLE DEVELOPMENT</p><a href="#about">SCROLL TO DISCOVER <span>↓</span></a></div>
  </section>'''
 home=re.sub(r'<section class="hero" id="home">.*?</section>',home_hero,home,count=1,flags=re.S)
@@ -81,8 +92,6 @@ i=iter(range(1,4))
 home=re.sub(r'<button class="text-link project-open".*?</button>',lambda m:link('VIEW PROJECT',f'/projects/project-0{next(i)}'),home)
 home=re.sub(r'<footer>.*?</footer>',lambda m:footer,home).replace('href="mailto:hashim@globalmino.com?subject=Discuss%20an%20opportunity"','href="/contact"')
 home=home.replace('src="assets/','src="/assets/').replace('href="/about">SCROLL','href="#about">SCROLL')
-banner='''<section class="home-banner ohs-home-banner" aria-labelledby="ohs-banner"><div class="home-banner-media"><img src="/assets/ohs-mining-safety.jpg" alt="Mine safety team conducting a pre-shift inspection at an open-pit mine" loading="lazy" width="1536" height="1024"></div><div class="home-banner-copy"><p class="eyebrow">OCCUPATIONAL HEALTH &amp; SAFETY</p><h2 id="ohs-banner">Every person.<br><em>Every task. Every shift.</em></h2><p>A practical framework for managing critical risks, protecting worker health and preparing mining and exploration teams to respond when conditions change.</p><div class="home-banner-actions">'''+link('EXPLORE OUR OHS APPROACH','/services/occupational-health-safety')+'''<span>Mining · Exploration · Field Operations</span></div></div></section>'''
-home=home.replace('<section class="about section" id="about">',banner+'<section class="about section" id="about">')
 # Home page only: drop the section/service counters, the hero index and the
 # "01 / " prefix on the country tiles. The shared helpers keep their numbering
 # so the inner pages are unaffected.
@@ -106,9 +115,9 @@ employees=[
  ('Eng. Abdelrazig Ahmed Abdelrazig Ahmed','Technical Consultant & Geologist','A geologist and mining professional with more than 10 years of experience across exploration, production, processing systems, technical consulting and mining-project management.','team-abdelrazig.jpg','abdelrazig-ahmed','B.Sc. Geology, specialising in Petroleum Geology, College of Petroleum and Minerals, Al-Neelain University'),
  ('Eng. Huzaifa Ahmed Salih Mohamed','Processing Engineer','A chemical engineer with more than six years of experience across cement and mining operations, specialising in mineral processing, production quality control and project delivery. He spent three years with Ariab Mining Company, the largest mining company in Sudan.','team-huzaifa.jpg','huzaifa-ahmed-salih','B.Sc. (Honours) in Chemical Engineering'),
  ('Dr. Rawi Elamin','Public Health Epidemiologist','A public health epidemiologist and global health security specialist with 16 years of experience supporting the World Health Organization (WHO) and national Ministries of Health across multiple regions.','team-rawi.jpg','rawi-elamin','MPH Epidemiology & Biostatistics, American University of Beirut · B.Sc. Public Health, University of Bahri'),
- ('Dr. Mona Ahmed Yagoub Mohammed','Public & Environmental Health Specialist','A multidisciplinary public and environmental health professional with more than 10 years of experience, focused on occupational health and safety and EHS/HSE management, alongside epidemiology and disease prevention.','team-mona.jpg','mona-ahmed-yagoub-mohammed','M.Sc. Public & Environmental Health, University of Gezira · B.Sc. Health & Environmental Sciences, University of Gezira'),
  ('Bushra Babiker Ahmed Babiker','Project Manager','An accounting and project management professional with experience in administration, organisational leadership, publishing and community organisations in Sudan and Lebanon.','team-bushra.jpg','bushra-babiker-ahmed-babiker','MBA Project Management, Sudan International University · B.Sc. Accounting, Omdurman Islamic University'),
  ('Dr. Ahmed Omar','Medical Doctor & Public Health Professional','A medical doctor and public health professional advancing stronger, data-led health systems across Africa and the Caribbean.','team-ahmed-omar.jpg',None,'MPH, KIT Royal Tropical Institute and Vrije Universiteit Amsterdam'),
+ ('Dr. Shaker Adam Idrees','Medical Doctor — Emergency & Occupational Medicine','A medical doctor with experience in emergency medicine, occupational medicine and public health across Sudan, Libya and Saudi Arabia since 2009.','team-shaker.jpg','shaker-adam-idrees','MBBS, University of Gadarif · Higher Diploma in Clinical Documentation Improvement, Capilano Consulting Center · Diploma in Occupational Medicine, Royal College of Physicians of Ireland'),
  ('Abdalla Adam Younis Mohammed','Biotechnology & Humanitarian Partnerships Professional','A biotechnology and microbiology graduate with more than 15 years of experience across national and international organisations, emergency response, field operations and NGO partnership coordination.','team-abdalla-adam.jpg','abdalla-adam-younis-mohammed','M.Sc. Disaster Management, International University of Africa · B.Sc. Biotechnology & Microbiology, Omdurman Islamic University'),
  ('Eng. Ogba Adam Edris Ali','Civil Engineer','A civil-engineering professional with experience in project management, infrastructure supervision, quality control, road maintenance and materials testing across Sudan and Saudi Arabia.','team-ogba-adam.jpg','ogba-adam-edris-ali','B.Sc. Civil Engineering · Mini MBA, British International Academy'),
  ('Eng. Ezzeldin Ali Suleiman Omar','Civil Engineer & Infrastructure Supervisor','A civil engineer whose experience spans roads, bridges, public infrastructure, materials supervision and municipal projects in Sudan and Saudi Arabia.','team-ezzeldin-ali.jpg','ezzeldin-ali-suleiman-omar','B.Sc. Civil Engineering — Roads & Transport, Sudan University of Science and Technology'),
@@ -336,9 +345,10 @@ def field(label,name,typ='text',required=False): return f'<label>{label}{" *" if
 form='<form id="contact-form"><div class="form-heading"><p class="eyebrow">YOUR NEXT OPPORTUNITY</p><h3>Send an enquiry.</h3><p>Tell us where you are working and how we can help.</p></div><div class="form-grid">'+field('Full Name','name',required=True)+field('Company','company')+field('Email','email','email',True)+field('Phone','phone','tel')+'<label>Country *<select name="country" required><option value="">Select a country</option>'+''.join(f'<option value="{c[1]}">{c[0]}</option>' for c in enquiry_countries)+'<option value="other">Other</option></select></label><label>Area of Interest *<select name="interest" required><option value="">Select an interest</option>'+''.join(f'<option value="{x.lower().replace(" ","-")}">{x}</option>' for x in ['Gold Mining','Mineral Exploration','Mining Consultancy','Investment Opportunity','Partnership','Other'])+'</select></label><label class="full">Message *<textarea aria-describedby="message-hint" name="message" required minlength="10" maxlength="5000" rows="6" placeholder="Tell us about your opportunity, location and the support you need."></textarea><span id="message-hint" class="field-hint">At least 10 characters.</span></label></div><p class="form-note">* Required fields. Your details are used to respond to this enquiry.</p><button class="button gold" type="submit">SEND ENQUIRY <span>↗</span></button><p id="form-status" role="status" aria-live="polite" tabindex="-1"></p><p class="form-note">You can also email <a href="mailto:info@globalmino.com">info@globalmino.com</a> directly.</p></form>'
 pages['/contact']=('Contact | Global Mino',hero('Let’s Talk','Let’s uncover<br>the next opportunity.','Connect with Global Mino to discuss mining opportunities, mineral exploration and technical consultancy across Africa.','sudan')+'<section class="section contact-layout"><div><p class="eyebrow">GET IN TOUCH</p><h2>A conversation<br>starts here.</h2><address><a href="mailto:info@globalmino.com">info@globalmino.com</a><br><br>Khartoum, Sudan<br><br><a href="https://globalmino.com">globalmino.com</a></address></div>'+form+'</section>')
 pages['/404']=('Page not found | Global Mino',hero('404 / Page not found','A different path<br>to opportunity.','The page you requested could not be found.','sudan')+section('CONTINUE EXPLORING','Find your way forward.',link('RETURN HOME','/','button gold')))
-head=source.split('<body>')[0]
+head=source.split('<body>')[0].replace('<html lang="en">','<html lang="en" dir="ltr">')
 head=re.sub(r'<link[^>]+(?:fonts.googleapis.com|fonts.gstatic.com)[^>]*>', '', head)
 head=head.replace('</head>', '<link rel="stylesheet" href="/fonts.css"><link rel="preload" href="/assets/fonts/dm-sans-0.woff2" as="font" type="font/woff2" crossorigin></head>')
+translators={lang:i18n.Translator(lang) for lang in i18n.TRANSLATED}
 for path,(title,body) in pages.items():
  desc=('Global Mino’s occupational health and safety approach for gold mining, mineral exploration and remote field operations.' if path=='/services/occupational-health-safety' else 'Global Mino — '+('mining, mineral exploration and technical consultancy across Sudan, Ethiopia, Cameroon and the Central African Republic.' if path=='/' else title.split(' | ')[0]+'. Explore mining, geological knowledge and responsible resource development across Africa.'))
  h=re.sub(r'<title>.*?</title>',lambda m:f'<title>{html.escape(title)}</title>',head)
@@ -351,14 +361,21 @@ for path,(title,body) in pages.items():
  if path=='/ceo-message': h=h.replace('</head>', '<link rel="stylesheet" href="/ceo-message.css"></head>')
  # Keep the brand palette last so it consistently governs every page-specific
  # stylesheet while src/home.html remains directly previewable.
- h=h.replace('<link rel="stylesheet" href="/brand.css">','').replace('</head>', '<link rel="stylesheet" href="/brand.css"></head>')
+ h=h.replace('<link rel="stylesheet" href="/brand.css">','').replace('</head>', '<link rel="stylesheet" href="/brand.css"><link rel="stylesheet" href="/site.css">'+('<link rel="stylesheet" href="/home.css">' if path=='/' else '')+'<link rel="stylesheet" href="/i18n.css">'+i18n.alternates(path)+'</head>')
  active=header.replace(f'href="{path}"',f'href="{path}" aria-current="page"')
  if path.startswith('/team/'): active=active.replace('href="/team"','href="/team" aria-current="page"')
  for group in ['countries','services']:
   if path.startswith('/'+group): active=active.replace(f'data-navigation-group="{group}"',f'data-navigation-group="{group}" class="current-group"')
- doc=h+'<body id="top"><a class="skip-link" href="#main">Skip to content</a>'+active+'<button class="menu-backdrop" tabindex="-1" aria-label="Close navigation" hidden></button><main id="main">'+body+'</main>'+('' if path=='/' else '<div class="contact">'+footer+'</div>')+credits+'<script src="/script.js" defer></script></body></html>'
- dest=out/('404.html' if path=='/404' else path.strip('/')+'/index.html' if path!='/' else 'index.html')
- dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(doc)
-(out/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(f'<url><loc>https://globalmino.com{p}</loc></url>' for p in pages if p!='/404')+'</urlset>')
+ doc=h+'<body id="top"'+(' class="page-home"' if path=='/' else '')+'><a class="skip-link" href="#main">Skip to content</a>'+active+'<button class="menu-backdrop" tabindex="-1" aria-label="Close navigation" hidden></button><main id="main">'+body+'</main>'+('' if path=='/' else '<div class="contact">'+footer+'</div>')+credits+'<script src="/script.js" defer></script></body></html>'
+ for lang in i18n.LANGS:
+  # The French and Arabic editions are translated from the finished English
+  # page, so every layout change above reaches all three languages.
+  edition=doc if lang=='en' else i18n.localize(doc,path,translators[lang])
+  if lang=='ar': edition=re.sub(r'href="/((?:style|pages|countries|gallery|ceo-message|brand|site|home)\.css)"',r'href="/rtl/\1"',edition)
+  folder=out if lang=='en' else out/lang
+  dest=folder/('404.html' if path=='/404' else path.strip('/')+'/index.html' if path!='/' else 'index.html')
+  dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(i18n.finish(edition,path,lang),encoding='utf-8')
+(out/'sitemap.xml').write_text(i18n.sitemap([p for p in pages if p!='/404']),encoding='utf-8')
 (out/'robots.txt').write_text('User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: https://globalmino.com/sitemap.xml\n')
-print(f'Built {len(pages)-1} pages and 404 fallback.')
+print(f'Built {len(pages)-1} pages and 404 fallback in {len(i18n.LANGS)} languages.')
+i18n.report(translators.values())

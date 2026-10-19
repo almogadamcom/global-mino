@@ -1,0 +1,142 @@
+/* Generated from /site.css by scripts/rtl.cjs. Do not edit. */
+/* Site-wide editorial layer — warm parchment canvas, one modern sans (Inter)
+   with tight display tracking, rounded borderless cards and gold actions.
+   Loaded after brand.css on every page; home.css refines the homepage. */
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-var-latin.woff2) format('woff2')}
+#top{--ed-canvas:#f2f0eb;--ed-card:#fff;--ed-ink:#292827;--ed-muted:#5f5b55;--ed-line:#e3e1dc;--ed-green:#0b5844;--ed-deep:#083f33;--ed-gold:#b88a2b;--ed-gold-ink:#86601a;--ed-gold-light:#e4c77e;--ed-width:1200px;--ed-gutter:max(24px,calc((100% - var(--ed-width))/2));background:var(--ed-canvas);color:var(--ed-ink);font-family:'Inter',system-ui,-apple-system,sans-serif;font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased}
+#top :is(h1,h2,h3,h4),#top #main :is(.team-card,.leadership-profile) h3,#top dialog h2{font-family:'Inter',system-ui,sans-serif;font-weight:500;letter-spacing:-.03em}
+#top #main :is(h1,h2,h3) em{font-family:inherit;font-style:normal;font-weight:inherit;color:var(--ed-gold-ink)}
+#top header,#top footer,#top nav{font-family:inherit}
+
+/* Type scale */
+#top #main h1{letter-spacing:-.04em;line-height:1.02}
+#top #main h2{letter-spacing:-.035em;line-height:1.05}
+#top #main .eyebrow{gap:10px;font-size:12px;font-weight:600;letter-spacing:.08em}
+#top #main .section-top::after{display:none}
+#top #main .section-top{margin-bottom:20px}
+
+/* Actions */
+#top .button{gap:18px;min-height:48px;padding:14px 22px;border-radius:12px;font-size:12px;font-weight:600;letter-spacing:.06em;box-shadow:none;transition:background .25s,transform .25s}
+#top .button:hover{transform:translateY(-1px)}
+#top .text-link{gap:14px;padding-bottom:4px;border-bottom-width:1px;font-size:12px;font-weight:600;letter-spacing:.06em}
+#top .header-cta{border-radius:12px;font-weight:600}
+
+/* Surfaces — canvas by default, white for the alternating "soft" bands */
+#top #main :is(.site-hero,.member-hero,.profile-hero,.ceo-hero,.operations,.projects,.visits,.services,.team-section,.section,.member-profile-content,.profile-content){background:transparent}
+#top #main :is(.ohs-soft,.ohs-emergency,.ohs-compliance,.profile-section.soft){background:var(--ed-card)}
+#top #main :is(.member-nav,.ohs-local-nav,.profile-country-switch){background:var(--ed-canvas);border-color:var(--ed-line)}
+
+/* Inner-page heroes */
+#top #main :is(.site-hero,.member-hero,.profile-hero,.ceo-hero){padding-top:150px}
+#top #main :is(.site-hero-heading,.member-heading,.profile-heading,.ceo-hero-copy) h1{font-size:clamp(40px,4.4vw,64px);font-weight:500}
+#top #main :is(.site-hero-heading,.member-heading,.profile-heading,.ceo-hero-copy)>.eyebrow,#top #main .site-hero-heading .breadcrumb+.eyebrow{display:inline-flex;width:max-content;padding:7px 14px;border:1px solid var(--ed-line);border-radius:999px;background:var(--ed-card);color:var(--ed-gold-ink);font-size:12px}
+#top #main :is(.site-hero-copy,.member-summary){font-size:17px;line-height:1.65}
+#top #main :is(.site-hero-photo,.member-photo,.profile-hero figure,.profile-photo,.ceo-portrait){border-radius:20px;overflow:hidden;box-shadow:none}
+#top #main .site-hero-photo{height:340px}
+#top #main .site-hero-photo figcaption{right:14px;left:auto;bottom:14px;padding:6px 12px;border-radius:999px;background:#00000066;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12px;letter-spacing:.06em}
+
+/* Media and cards */
+#top #main :is(.about-image,.service-image,.project-image,.country,.ohs-field figure,.visit-grid figure,.visit-grid button,.gallery-item){border-radius:16px;overflow:hidden}
+#top #main .about-image{box-shadow:none}
+#top #main .about-image::before{display:none}
+#top #main .team-card{border:0;border-radius:20px;background:var(--ed-card);box-shadow:none;padding:10px}
+#top #main .team-card:hover{box-shadow:0 18px 40px #29282714}
+#top #main .team-portrait{border-radius:14px}
+#top #main .team-card-body{padding:22px 14px 14px}
+#top #main .team-card-body::before{display:none}
+#top #main .team-card h3{font-size:clamp(21px,1.8vw,26px)}
+#top #main .leadership-profile{border:0;border-radius:24px;background:var(--ed-card)}
+#top #main .leadership-profile .team-portrait{border-radius:16px}
+#top #main :is(.ohs-card,.kpi-grid article,.health-matrix article,.training-path article,.profile-cards article,.type-grid article){border:0;border-radius:16px;background:var(--ed-card);box-shadow:none}
+#top #main :is(.ohs-soft,.ohs-emergency,.ohs-compliance) :is(.ohs-card,.training-path article){background:var(--ed-canvas)}
+#top #main .credential-list article{border-color:var(--ed-line)}
+#top #main .profile-tags span,#top #main .ohs-commitments span{border:1px solid var(--ed-line);border-radius:999px;background:var(--ed-card);font-weight:600}
+#top #main .country{border-radius:16px}
+#top #main .country-no{padding:6px 12px;border-radius:999px;background:#0000004d;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12px;font-weight:600;letter-spacing:.08em}
+#top #main .project{border-radius:20px}
+
+/* Gold accents on dark photography */
+#top #main :is(.ohs-hero,.home-split-panel,.country) :is(h1,h2,h3) em{color:var(--ed-gold-light)}
+
+/* Country cards — legible labels on every page */
+#top #main .country::after{background:linear-gradient(0deg,#0a0c0bf0 0%,#0a0c0b80 45%,#0a0c0b10 80%)}
+#top #main .country-body p{margin-bottom:8px;color:#e9ecea;font-size:13px;letter-spacing:0;text-transform:none}
+#top #main .country h3{color:#fff;letter-spacing:-.035em}
+#top #main .country-link{font-size:12px;font-weight:600;letter-spacing:.06em;border-top-color:#ffffff38}
+
+/* Forms */
+#top #main :is(input,select,textarea){border-radius:12px;font-family:inherit}
+#top #main .filters button{border-radius:999px;font-family:inherit;font-weight:600}
+
+/* Closing call to action — a rounded deep-green card on every page */
+#top .contact{background:var(--ed-canvas)}
+#top .contact .contact-intro{display:grid;grid-template-columns:1.1fr 1fr;grid-template-areas:"eyebrow eyebrow" "title copy" "title actions";gap:20px 64px;margin:0 12px 12px;padding:72px max(32px,calc((100% - var(--ed-width))/2 - 12px));border:0;border-radius:24px;background:var(--ed-deep);color:#fff}
+#top #main .contact .contact-intro>.eyebrow,#top .contact .contact-intro>.eyebrow{grid-area:eyebrow;margin:0;color:var(--ed-gold-light)}
+#top #main .contact .contact-intro h2,#top .contact .contact-intro h2{grid-area:title;max-width:none;color:#fff;font-size:clamp(34px,3.8vw,52px);line-height:1.04;letter-spacing:-.035em}
+#top #main .contact .contact-intro>p:not(.eyebrow),#top .contact .contact-intro>p:not(.eyebrow){grid-area:copy;max-width:440px;color:#d6e2de;font-size:16px;line-height:1.65}
+#top .contact .contact-intro .actions{grid-area:actions;flex-wrap:wrap;align-self:start;gap:16px 28px;margin:0}
+#top #main .contact .contact-intro .text-link{color:#fff}
+#top .contact:has(>footer),#top .contact footer,#top footer{background:var(--ed-green)}
+
+@media(max-width:1000px){
+ #top .contact .contact-intro{grid-template-columns:1fr;grid-template-areas:"eyebrow" "title" "copy" "actions";padding:56px 32px}
+}
+@media(max-width:760px){
+ #top #main :is(.site-hero,.member-hero,.profile-hero,.ceo-hero){padding-top:110px}
+ #top #main .site-hero-photo{height:220px}
+ #top .contact .contact-intro{margin:0 8px 8px;padding:44px 22px;border-radius:20px}
+}
+
+/* Language switcher — EN / ع / FR, in the header on every page */
+#top header nav{order:1}
+#top .lang-switch{order:2;display:flex;flex:none;gap:2px;margin-inline-start:4px;padding:3px;border:1px solid #ffffff38;border-radius:999px}
+#top .header-cta{order:3}
+#top .lang-switch a{display:grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:999px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em;opacity:.78;transition:background .2s,opacity .2s}
+#top .lang-switch a[lang=ar]{font-family:'IBM Plex Sans Arabic','Inter',sans-serif;font-size:14px;letter-spacing:0}
+#top .lang-switch a:hover{opacity:1;background:#ffffff1f}
+#top .lang-switch a[aria-current]{background:#fff;color:var(--ed-green);opacity:1}
+@media(max-width:760px){
+ #top .lang-switch{margin-inline-start:auto}
+ #top .lang-switch a{min-width:30px;height:28px;padding:0 6px}
+ #top .menu-toggle{order:3;margin-right:10px}
+}
+
+/* Keep translated navigation and process labels within tablet widths. */
+@media(min-width:761px) and (max-width:1024px){
+ #top header{gap:8px}
+ #top header nav{gap:8px}
+ #top header nav :is(a,summary,.nav-link){font-size:12px}
+ #top .header-cta{padding:10px}
+ #top .lang-switch a{min-width:26px;padding:0 4px}
+ #top #main .improvement-loop{flex-wrap:wrap;gap:20px}
+}
+
+/* Corrections to the shared design (not on the live site):
+   - phones: the logo, the language switcher and the menu button must share one
+     row; at 320–400px the menu button used to sit partly or fully off-screen.
+   - 1201–1360px: the header call-to-action returns beside the full navigation
+     and used to be cut off at the right edge. */
+@media(max-width:760px){
+ #top header .brand-logo{width:150px}
+ #top .lang-switch{gap:0;padding:2px}
+ #top .lang-switch a{min-width:28px;height:28px;padding:0 5px}
+ #top .menu-toggle{margin-right:8px;white-space:nowrap}
+}
+@media(max-width:380px){
+ #top header{gap:8px;padding-right:16px;padding-left:16px}
+ #top header .brand-logo{width:124px}
+ #top .lang-switch a{min-width:26px;padding:0 4px}
+ /* Icon-only menu button; its accessible name stays in aria-label. */
+ #top .menu-toggle{margin-right:4px;font-size:0}
+ #top .menu-toggle span{margin:0;font-size:20px}
+ /* Long button labels (French) wrap rather than widen the hero cards past the screen. */
+ #top.page-home #main .home-split .button{white-space:normal;text-align:start}
+}
+@media(min-width:1201px) and (max-width:1360px){
+ #top header{gap:14px}
+ #top nav{gap:12px}
+ #top .header-cta{padding:10px 12px}
+ #top .header-cta span{margin-right:8px}
+}
+/* French step names are longer; the improvement cycle wraps instead of overflowing. */
+@media(min-width:701px) and (max-width:1000px){html[lang=fr] #main .improvement-loop{flex-wrap:wrap;justify-content:flex-start;row-gap:16px}}

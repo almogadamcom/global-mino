@@ -1,0 +1,13 @@
+/* Language editions: adjustments the shared design (site.css) cannot make on
+   its own. Layout mirroring for Arabic comes from the generated stylesheets in
+   /rtl/; the header switcher itself is styled in site.css. */
+
+/* Arabic is a joined script: letter-spacing breaks the joins, so it is removed
+   everywhere. Arabic headings need more line height than Latin capitals. */
+html[lang=ar] *{letter-spacing:0!important}
+/* Latin words keep Inter; Arabic letters, which Inter lacks, come from Plex. */
+html[lang=ar] #top,html[lang=ar] #top *{font-family:'Inter','IBM Plex Sans Arabic',system-ui,sans-serif!important}
+html[lang=ar] body{font-size:17px}
+html[lang=ar] #main :is(h1,h2,h3){line-height:1.3}
+html[lang=ar] input,html[lang=ar] textarea,html[lang=ar] select{text-align:right}
+html[lang=ar] input[type=email],html[lang=ar] input[type=tel]{direction:ltr;text-align:right}

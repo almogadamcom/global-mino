@@ -11,3 +11,7 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# Untranslated-string reports written by the build.
+i18n/_missing-*.json
+i18n/_unused-*.json

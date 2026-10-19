@@ -1,0 +1,45 @@
+/* Generated from /ceo-message.css by scripts/rtl.cjs. Do not edit. */
+/* Message from the Founder & Chief Executive Officer. */
+.ceo-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,420px);gap:64px;align-items:center;padding:145px max(32px,calc((100% - var(--site-width))/2)) 72px;background:var(--site-dark);color:#fff}
+.ceo-hero-copy .eyebrow{color:var(--warm);font-size:12px;letter-spacing:2.2px}
+.ceo-hero-copy h1{margin:18px 0 0;font-size:clamp(34px,3.7vw,52px);line-height:1.06;letter-spacing:-.03em}
+.ceo-hero-copy h1 em{color:var(--warm);font-style:normal}
+.ceo-company{margin:22px 0 0;padding-top:20px;border-top:1px solid #ffffff24;font-size:12px;font-weight:600;letter-spacing:2.4px;text-transform:uppercase;color:#c9d4cf}
+.ceo-lead{margin:24px 0 0;max-width:62ch;font-size:17px;line-height:1.85;color:#d3dade}
+.ceo-hero .breadcrumb{color:#c6d2cd}
+.ceo-hero .breadcrumb a{color:#d3dade}
+
+/* The portrait is a studio photograph on white, so it sits in a light card. */
+.ceo-portrait{margin:0}
+.ceo-portrait img{aspect-ratio:4/5;object-fit:cover;border-radius:12px;background:#fff;box-shadow:0 26px 60px #04080b59}
+.ceo-portrait figcaption{margin-top:20px;padding-top:18px;border-top:2px solid var(--gold)}
+.ceo-portrait b{display:block;font-size:19px;font-weight:600;letter-spacing:-.02em}
+.ceo-portrait span{display:block;margin-top:7px;font-size:12px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--warm)}
+
+/* The letter itself: one measured column. */
+.ceo-letter{max-width:none;margin:0;padding:84px max(32px,calc((100% - var(--site-width))/2)) 96px}
+.ceo-letter-body{max-width:76ch}
+.ceo-letter-body p{margin:0 0 22px;font-size:17px;line-height:1.92;color:#454f56}
+.ceo-letter-body p:last-child{margin-bottom:0}
+.ceo-letter-body h2{margin:52px 0 24px;font-size:clamp(26px,2.7vw,36px);line-height:1.2}
+.ceo-letter-body h2:first-child{margin-top:0}
+.ceo-quote{margin:40px 0 36px;padding:6px 28px 6px 0;border-right:3px solid var(--gold)}
+.ceo-quote p{margin:0;font-size:clamp(21px,2.2vw,27px);line-height:1.5;font-weight:500;color:#20292f;letter-spacing:-.015em}
+.ceo-signoff{margin-top:56px;padding-top:30px;border-top:1px solid var(--site-line);max-width:76ch}
+.ceo-signoff-name{margin:0;font-size:22px;font-weight:600;letter-spacing:-.02em;color:#20292f}
+.ceo-signoff-role{margin:8px 0 22px;font-size:12px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#81601d}
+.ceo-signoff .text-link{color:#20292f}
+
+@media(max-width:1024px){
+ .ceo-hero{grid-template-columns:minmax(0,1fr) minmax(240px,320px);gap:40px}
+}
+@media(max-width:760px){
+ .ceo-hero{grid-template-columns:1fr;gap:34px;padding:116px 24px 44px}
+ .ceo-portrait{max-width:340px}
+ .ceo-hero-copy h1{font-size:clamp(32px,9vw,44px)}
+ .ceo-lead{font-size:15px}
+ .ceo-letter{padding-top:52px;padding-bottom:60px}
+ .ceo-letter-body p{font-size:15px;line-height:1.88}
+ .ceo-letter-body h2{margin:40px 0 18px}
+ .ceo-quote{margin:32px 0 28px;padding-right:20px}
+}

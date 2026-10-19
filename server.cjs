@@ -4,6 +4,7 @@ if(require('node:fs').existsSync(envPath))process.loadEnvFile(envPath);
 const http=require('node:http'),fs=require('node:fs/promises'),path=require('node:path');
 const root=path.join(__dirname,'dist');
 const {saveEnquiry}=require('./lib/enquiries.cjs');
+const listEnquiries=require('./api/enquiries.js');
 const interests=['gold-mining','mineral-exploration','mining-consultancy','investment-opportunity','partnership','other'];
 const json=(res,status,data)=>{res.writeHead(status,{'Content-Type':'application/json'});res.end(JSON.stringify(data))};
 const server=http.createServer(async(req,res)=>{
@@ -19,11 +20,13 @@ const payload=Object.fromEntries(['name','company','email','phone','country','in
 const result=await saveEnquiry(payload);
 return json(res,result.status,result.ok?{ok:true}:{error:result.error});
 }
+// Reuse the Vercel /admin feed handler; shim the res.status().json() helpers it expects.
+if(url.pathname==='/api/enquiries'){res.status=code=>{res.statusCode=code;return res};res.json=data=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(data))};return listEnquiries(req,res)}
 if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);return res.end()}
 let file=path.resolve(root,'.'+decodeURIComponent(url.pathname));
 if(file!==root&&!file.startsWith(root+path.sep)){res.writeHead(403);return res.end()}
 try{if((await fs.stat(file)).isDirectory())file=path.join(file,'index.html')}catch{}
-let data;try{data=await fs.readFile(file)}catch{res.statusCode=404;file=path.join(root,'404.html');data=await fs.readFile(file)}
+let data;try{data=await fs.readFile(file)}catch{res.statusCode=404;const edition=url.pathname.match(/^\/(fr|ar)(?:\/|$)/)?.[1];file=path.join(root,edition||'','404.html');data=await fs.readFile(file)}
 res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.jpg':'image/jpeg','.svg':'image/svg+xml','.png':'image/png','.xml':'application/xml','.txt':'text/plain','.woff2':'font/woff2'})[path.extname(file)]||'application/octet-stream');
 res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');res.setHeader('Cache-Control',['.jpg','.png','.svg','.woff2'].includes(path.extname(file))?'public, max-age=86400':'no-cache');res.end(req.method==='HEAD'?undefined:data);
 }catch{json(res,500,{error:'Request could not be completed'})}

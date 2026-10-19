@@ -1,1 +1,1 @@
-module.exports={testDir:'./tests',testMatch:'**/*.spec.cjs',timeout:120000,use:{channel:'chrome',baseURL:'http://127.0.0.1:4174'},webServer:{command:'PORT=4174 node server.cjs',url:'http://127.0.0.1:4174',reuseExistingServer:false},workers:2};
+module.exports={testDir:'./tests',testMatch:'**/*.spec.cjs',timeout:120000,use:{channel:'chrome',baseURL:'http://127.0.0.1:4174'},webServer:{command:'node server.cjs',env:{PORT:'4174'},url:'http://127.0.0.1:4174',reuseExistingServer:false},workers:2};

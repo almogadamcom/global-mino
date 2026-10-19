@@ -270,7 +270,7 @@ footer .footer-grid h4 { color:#e4c77e; }
 #main .home-site-hero .site-hero-photo::before { background:linear-gradient(180deg,transparent 48%,#231a0ecc); }
 #main .home-hero-rail { border-color:#d8c59d; color:#615032; }
 #main .home-hero-rail :is(p,a,a span) { color:#71521a; }
-#main .home-site-hero+.about { background:#fff; }
+#main :is(.home-site-hero,.home-split)+.about { background:#fff; }
 #main .about-image { box-shadow:0 20px 50px #57442214; }
 #main #operations .country::after { background:linear-gradient(0deg,#21190eed, #21190e22 72%); }
 .gold { background:#b88a2b; color:#17140e; }
@@ -281,3 +281,5 @@ footer .footer-grid h4 { color:#e4c77e; }
  #main .home-site-hero .site-hero-photo { position:relative; z-index:0; inset:auto; height:250px; width:100%; opacity:1; transform:none; }
  #main .home-banner-media::after { background:linear-gradient(180deg,transparent 75%,#fff); }
 }
+#main .home-split-copy :is(h1,h2) { color:#fff; }
+#main .home-split-copy :is(h1,h2) em { color:#e4c77e; }

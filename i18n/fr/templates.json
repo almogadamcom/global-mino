@@ -1,0 +1,18 @@
+{
+ "Global Mino — (.+)\\. Explore mining, geological knowledge and responsible resource development across Africa\\.": "Global Mino — {0}. Découvrez l’exploitation minière, le savoir géologique et la mise en valeur responsable des ressources en Afrique.",
+ "(.+) \\| Global Mino Team": "{0} | Équipe Global Mino",
+ "(.+) \\| Global Mino": "{0} | Global Mino",
+ "(.+) Gold, Mining & Opportunities": "{0} : or, mines et opportunités",
+ "VISIT (\\d+) / (.+)": "VISITE {0} / {1}",
+ "(\\d+) / (.+)": "{0} / {1}",
+ "Open photograph (\\d+) of (\\d+) from the (.+)": "Ouvrir la photographie {0} sur {1} — {2}",
+ "(\\d+) of (\\d+) supplied": "{0} sur {1} fournies",
+ "(\\d+) frames reserved": "{0} emplacements réservés",
+ "Photograph (\\d+) · caption to be supplied": "Photographie {0} · légende à fournir",
+ "Portrait of (.+)": "Portrait : {0}",
+ "Project (\\d+)": "Projet {0}",
+ "PROJECT PLACEHOLDER / (\\d+)": "PROJET PROVISOIRE / {0}",
+ "(\\d+) project placeholders shown\\.": "{0} projets provisoires affichés.",
+ "(.+) \\*": "{0} *",
+ "(.+) · (.+)": "{0} · {1}"
+}
