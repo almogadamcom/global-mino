@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 465" width="400" height="465">
+  <!-- Illustrated stand-in for a team member without a supplied photograph.
+       Deliberately stylised so it is never mistaken for a photograph. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e6650"/>
+      <stop offset="1" stop-color="#073a2f"/>
+    </linearGradient>
+    <linearGradient id="scarf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8b55a"/>
+      <stop offset="1" stop-color="#b88a2b"/>
+    </linearGradient>
+    <linearGradient id="blazer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22333c"/>
+      <stop offset="1" stop-color="#162229"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="465" fill="url(#bg)"/>
+  <circle cx="200" cy="200" r="158" fill="#ffffff" opacity=".05"/>
+  <circle cx="200" cy="200" r="176" fill="none" stroke="#e4c77e" stroke-opacity=".28" stroke-width="1.5"/>
+
+  <!-- shoulders and blazer -->
+  <path d="M32 465C40 386 104 344 200 338C296 344 360 386 368 465Z" fill="url(#blazer)"/>
+  <!-- blouse -->
+  <path d="M166 346L200 424L234 346C222 340 212 338 200 338C188 338 178 340 166 346Z" fill="#f3efe6"/>
+  <!-- lapels -->
+  <path d="M166 346L200 424L162 465H118C124 410 140 368 166 346Z" fill="#2b3f49"/>
+  <path d="M234 346L200 424L238 465H282C276 410 260 368 234 346Z" fill="#2b3f49"/>
+  <!-- lapel pin -->
+  <circle cx="262" cy="398" r="7" fill="#e4c77e"/>
+  <circle cx="262" cy="398" r="3" fill="#b88a2b"/>
+
+  <!-- headscarf, back drape -->
+  <path d="M200 92C138 92 108 142 110 200C112 254 124 304 148 334C164 354 184 362 200 364C216 362 236 354 252 334C276 304 288 254 290 200C292 142 262 92 200 92Z" fill="url(#scarf)"/>
+  <!-- face -->
+  <ellipse cx="200" cy="208" rx="54" ry="66" fill="#8a5a3c"/>
+  <!-- scarf band across the forehead -->
+  <path d="M138 196C142 142 168 118 200 118C232 118 258 142 262 196C246 166 226 154 200 154C174 154 154 166 138 196Z" fill="#c99b37"/>
+  <!-- scarf wrapped under the chin -->
+  <path d="M146 250C156 298 182 320 200 322C218 320 244 298 254 250C250 302 232 348 200 356C168 348 150 302 146 250Z" fill="#c99b37"/>
+  <!-- fold highlight -->
+  <path d="M120 214C124 262 138 300 158 326" fill="none" stroke="#f0d78f" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- simple, friendly features -->
+  <path d="M176 210Q185 203 194 210M206 210Q215 203 224 210" fill="none" stroke="#3f2617" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M186 242Q200 253 214 242" fill="none" stroke="#3f2617" stroke-width="3.5" stroke-linecap="round"/>
+  <ellipse cx="174" cy="232" rx="9" ry="5" fill="#b0623f" opacity=".35"/>
+  <ellipse cx="226" cy="232" rx="9" ry="5" fill="#b0623f" opacity=".35"/>
+</svg>

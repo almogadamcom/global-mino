@@ -10,6 +10,7 @@
  "(\\d+) frames reserved": "{0} emplacements réservés",
  "Photograph (\\d+) · caption to be supplied": "Photographie {0} · légende à fournir",
  "Portrait of (.+)": "Portrait : {0}",
+ "Illustration of (.+)": "Illustration : {0}",
  "Project (\\d+)": "Projet {0}",
  "PROJECT PLACEHOLDER / (\\d+)": "PROJET PROVISOIRE / {0}",
  "(\\d+) project placeholders shown\\.": "{0} projets provisoires affichés.",

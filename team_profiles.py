@@ -165,7 +165,7 @@ TEAM_PROFILES = {
     "mona-mohammed": {
         "name": "Dr. Mona Mohammed",
         "role": "Public Health & Environmental Health Specialist",
-        "photo": None,
+        "photo": "team-mona-illustration.svg",
         "summary": "Multidisciplinary public-health and environmental-health professional with more than 10 years of experience spanning epidemiology, disease prevention, vector control, health promotion, food safety, sanitation, infection prevention, waste management, occupational health and EHS/HSE. Her CV also records digital sustainability-governance concepts.",
         "countries": ["Sudan"],
         "education": [

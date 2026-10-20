@@ -10,6 +10,7 @@
  "(\\d+) frames reserved": "إطارات محجوزة: {0}",
  "Photograph (\\d+) · caption to be supplied": "الصورة {0} · سيُضاف الوصف لاحقًا",
  "Portrait of (.+)": "صورة {0}",
+ "Illustration of (.+)": "رسم توضيحي يمثّل {0}",
  "Project (\\d+)": "المشروع {0}",
  "PROJECT PLACEHOLDER / (\\d+)": "مشروع قيد الإعداد / {0}",
  "Gold in (.+)\\.": "الذهب في {0}.",
